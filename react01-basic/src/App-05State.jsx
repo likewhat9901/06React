@@ -86,7 +86,7 @@ function App() {
       }}></MyCont2>
     </>
   }
-  else{
+  else if(mode === 'both'){
     contents = <>
       <MyCont1 myModeChange={(mode)=>{    
         setMode(mode);
@@ -99,8 +99,8 @@ function App() {
 
   return (<>
     <div className="App">
-      <Top myModeChange={(mode)=>{
-        setMode(mode);
+      <Top myModeChange={(m)=>{
+        setMode(m);
       }}></Top>
       <ol>
         {/* 앞에서 if문을 통해 mode가 어떤값인지에 따라 설정된 컴포넌트를

@@ -22,18 +22,11 @@ function MyBody(props){
 
   return (
     <ol>
-      {/* 첫번째 경고창은 고정된 메세지를 알림창으로 출력한다.
-      props로 전달된 함수를 자식 컴포넌트에서 그대로 사용하는 형식이다.
-      링크를 클릭하면 알림창이 뜨고, 닫으면 화면이 새로고침된다. */}
       <li><a href="/" onClick={()=>{props.onMyAlert1();}}>프론트엔드</a></li>
         <ul>
           {liTag1}
         </ul>
-      {/* 이벤트 객체를 통해 화면이 새로고침 되지 않도록 요청을 차단한다.
-      React는 비동기 방식으로 화면을 전환하므로 화면이 새로고침 되면 안된다.
-      이런 경우 초기화면으로 전환되기 때문이다. */}
       <li><a href="/" onClick={(event)=>{
-        /* 이벤트가 가진 기본동작을 차단한다. */
         event.preventDefault();
         props.onMyAlert2('백앤드');
       }}>백엔드</a></li>
