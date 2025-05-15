@@ -4,11 +4,9 @@ import { useState } from "react";
 import NavList from "./components/navigation/NavList";
 import NavView from "./components/navigation/NavView";
 import NavWrite from "./components/navigation/NavWrite";
-import NavEdit from "./components/navigation/NavEdit";
 import ArticleList from "./components/article/ArticleList";
 import ArticleView from "./components/article/ArticleView";
 import ArticleWrite from "./components/article/ArticleWrite";
-import ArticleEdit from "./components/article/ArticleEdit";
 
 /* 페이지가 없을때 임시로 사용하기 위한 컴포넌트 */
 function ReadyComp() {
@@ -136,77 +134,6 @@ function App(props) {
       // 'list'로 되돌아가기
       setMode('list');
     }}/>;
-  }
-  else if (mode === 'delete') {
-    // 삭제1(권장)
-    /* 새로운 빈 배열 생성 */
-    let newBoardData = [];
-    for (let i = 0; i < boardData.length; i++) {
-      /* 삭제하려는 게시물이 아닌 것만 새로운 배열에 추가 */
-      if (no !== boardData[i].no) {
-        /* 새로운 배열에는 삭제하려는 게시물이 추가되지 않는다. */
-        newBoardData.push(boardData[i]);
-      }
-    }
-    /* 새로운 배열로 State를 변경. 리렌더링 */
-    setBoardData(newBoardData);
-
-    // 삭제2(비추천)
-    // for (let i = 0; i < boardData.length; i++) {
-    //   if (no === boardData[i].no) {
-    //     boardData.splice(i, 1);
-    //   }
-    // }
-    // setBoardData(boardData);
-
-    // 삭제가 완료되면 리스트로 전환.
-    setMode('list');
-  }
-  else if (mode === 'edit') {
-    titleVar = '게시판 - 수정(props)';
-
-    navComp = <NavEdit onChangeMode={()=>{
-      /* 목록으로 전환하는 기능 */
-      setMode('list');
-    }}
-    onBack={()=>{
-      /* 열람으로 전환하는 기능 */
-      setMode('view');
-      setNo(no);
-    }} />
-
-    // 데이터의 개수만큼 반복해서 수정할 게시물 선택
-    for (let i = 0; i < boardData.length; i++) {
-      if (no===boardData[i].no) {
-        selectRow = boardData[i];
-      }
-    }
-    // 수정할 게시물을 자식 컴포넌트로 전달
-    articleComp = <ArticleEdit selectRow={selectRow} 
-      editAction={(t,w,c)=>{
-        /* 수정을 위한 객체를 생성. 단, 일련번호와 작성일은 기존의 값을 그대로
-        사용한다. */
-        let editBoardData = {no:no, title:t, writer:w, contents:c,
-          date:selectRow.date};
-        console.log('수정내용', editBoardData);
-
-        // 스프레드 연산자로 기존 배열데이터의 복사본을 생성
-        let copyBoardData = [...boardData];
-        for (let i = 0; i < copyBoardData.length; i++) {
-          /* 수정할 객체를 찾는다. */
-          if (copyBoardData[i].no === no) {
-            /* 수정된 내용의 객체로 변경한다. */
-            copyBoardData[i] = editBoardData;
-            /* 반복문 탈출 */
-            break;
-          }
-        }
-        /* 복사본을 통해 State를 변경한다. */
-        setBoardData(copyBoardData);
-        /* 수정된 내용 확인을 위해 '열람' 화면으로 전환 */
-        setMode('view');
-      }}
-    />
   }
   else {
     /* mode값이 없는 경우 '준비중'을 화면에 표시한다. */

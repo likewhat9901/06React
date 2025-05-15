@@ -19,6 +19,3 @@ input[type=submit] { width:100px; }
 #boardTable td.subject{
     text-align: left;
 }
-.contWrap{
-  white-space: pre-wrap;
-}

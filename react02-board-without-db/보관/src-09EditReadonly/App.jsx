@@ -182,31 +182,7 @@ function App(props) {
       }
     }
     // 수정할 게시물을 자식 컴포넌트로 전달
-    articleComp = <ArticleEdit selectRow={selectRow} 
-      editAction={(t,w,c)=>{
-        /* 수정을 위한 객체를 생성. 단, 일련번호와 작성일은 기존의 값을 그대로
-        사용한다. */
-        let editBoardData = {no:no, title:t, writer:w, contents:c,
-          date:selectRow.date};
-        console.log('수정내용', editBoardData);
-
-        // 스프레드 연산자로 기존 배열데이터의 복사본을 생성
-        let copyBoardData = [...boardData];
-        for (let i = 0; i < copyBoardData.length; i++) {
-          /* 수정할 객체를 찾는다. */
-          if (copyBoardData[i].no === no) {
-            /* 수정된 내용의 객체로 변경한다. */
-            copyBoardData[i] = editBoardData;
-            /* 반복문 탈출 */
-            break;
-          }
-        }
-        /* 복사본을 통해 State를 변경한다. */
-        setBoardData(copyBoardData);
-        /* 수정된 내용 확인을 위해 '열람' 화면으로 전환 */
-        setMode('view');
-      }}
-    />
+    articleComp = <ArticleEdit selectRow={selectRow} />
   }
   else {
     /* mode값이 없는 경우 '준비중'을 화면에 표시한다. */
