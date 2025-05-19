@@ -1,0 +1,290 @@
+{
+  "results": [
+    {
+      "gender": "female",
+      "name": {
+        "title": "Mrs",
+        "first": "Juanita",
+        "last": "Murphy"
+      },
+      "location": {
+        "street": {
+          "number": 3211,
+          "name": "W Gray St"
+        },
+        "city": "Berkeley",
+        "state": "New Mexico",
+        "country": "United States",
+        "postcode": 35101,
+        "coordinates": {
+          "latitude": "84.8433",
+          "longitude": "138.0865"
+        },
+        "timezone": {
+          "offset": "-9:00",
+          "description": "Alaska"
+        }
+      },
+      "email": "juanita.murphy@example.com",
+      "login": {
+        "uuid": "79515e19-496d-4f3e-a990-b8e9f666d75c",
+        "username": "angrypanda579",
+        "password": "messiah",
+        "salt": "MA20m7lK",
+        "md5": "9fc6647c3e8c3e9cc6d81001f1df468e",
+        "sha1": "9e998be33d0bec1acb50d7583061fd33854a486b",
+        "sha256": "0ff959ac648a66586d542f54784d4fa9cc63dda4c7b95928fca3c5a95c01e648"
+      },
+      "dob": {
+        "date": "1997-02-07T10:03:13.329Z",
+        "age": 28
+      },
+      "registered": {
+        "date": "2014-07-18T03:09:30.810Z",
+        "age": 10
+      },
+      "phone": "(543) 843-7416",
+      "cell": "(617) 474-4044",
+      "id": {
+        "name": "SSN",
+        "value": "230-80-8567"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/95.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/95.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/95.jpg"
+      },
+      "nat": "US"
+    },
+    {
+      "gender": "female",
+      "name": {
+        "title": "Ms",
+        "first": "Hanaé",
+        "last": "Carpentier"
+      },
+      "location": {
+        "street": {
+          "number": 6325,
+          "name": "Place de L'Église"
+        },
+        "city": "Brest",
+        "state": "Charente-Maritime",
+        "country": "France",
+        "postcode": 49320,
+        "coordinates": {
+          "latitude": "-8.4572",
+          "longitude": "-112.4509"
+        },
+        "timezone": {
+          "offset": "0:00",
+          "description": "Western Europe Time, London, Lisbon, Casablanca"
+        }
+      },
+      "email": "hanae.carpentier@example.com",
+      "login": {
+        "uuid": "a91c4c67-0664-460e-8c9a-c6f62c7a4326",
+        "username": "blacksnake183",
+        "password": "bucks",
+        "salt": "jtsEHkfQ",
+        "md5": "f3707ccb6ccd52814db856413c06abcc",
+        "sha1": "b1602c80e038fed6480d7cb7eb327b59ff151e6b",
+        "sha256": "6d18f8416930206d394a8975ab5700f7ce0b45dbf00dc109e70ff5257d121d42"
+      },
+      "dob": {
+        "date": "1998-03-28T06:22:37.947Z",
+        "age": 27
+      },
+      "registered": {
+        "date": "2013-03-30T11:54:49.414Z",
+        "age": 12
+      },
+      "phone": "01-91-52-99-79",
+      "cell": "06-29-49-28-84",
+      "id": {
+        "name": "INSEE",
+        "value": "2980227679765 38"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/46.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/46.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/46.jpg"
+      },
+      "nat": "FR"
+    },
+    {
+      "gender": "female",
+      "name": {
+        "title": "Ms",
+        "first": "Eliza",
+        "last": "Røe"
+      },
+      "location": {
+        "street": {
+          "number": 4135,
+          "name": "Frantzebråtveien"
+        },
+        "city": "Kvithammer",
+        "state": "Nord-Trøndelag",
+        "country": "Norway",
+        "postcode": "0259",
+        "coordinates": {
+          "latitude": "-62.3717",
+          "longitude": "-64.8351"
+        },
+        "timezone": {
+          "offset": "+3:30",
+          "description": "Tehran"
+        }
+      },
+      "email": "eliza.roe@example.com",
+      "login": {
+        "uuid": "47821b22-d1f8-470e-a93e-fbe3e7e3dc74",
+        "username": "silverwolf401",
+        "password": "deborah",
+        "salt": "f0pb6e7j",
+        "md5": "13c62912676cf2ce26630337bb6da571",
+        "sha1": "a97d2b7a2a2e4f29858a48f79b12d81a5ba284c1",
+        "sha256": "3324a4bb4a541671e057dd8c838c06d35bf9eb9fec913ee70ba2083e5f6fc39a"
+      },
+      "dob": {
+        "date": "1945-01-31T08:52:02.024Z",
+        "age": 80
+      },
+      "registered": {
+        "date": "2014-11-13T07:22:15.120Z",
+        "age": 10
+      },
+      "phone": "81057261",
+      "cell": "90720095",
+      "id": {
+        "name": "FN",
+        "value": "31014544294"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/3.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/3.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/3.jpg"
+      },
+      "nat": "NO"
+    },
+    {
+      "gender": "male",
+      "name": {
+        "title": "Mr",
+        "first": "Chatura",
+        "last": "Kamath"
+      },
+      "location": {
+        "street": {
+          "number": 6208,
+          "name": "Sampige Rd"
+        },
+        "city": "Bikaner",
+        "state": "Rajasthan",
+        "country": "India",
+        "postcode": 18509,
+        "coordinates": {
+          "latitude": "52.9510",
+          "longitude": "49.1695"
+        },
+        "timezone": {
+          "offset": "-3:30",
+          "description": "Newfoundland"
+        }
+      },
+      "email": "chatura.kamath@example.com",
+      "login": {
+        "uuid": "bfb98b94-bc96-4367-a1f3-0e1e24bf50a0",
+        "username": "greengoose368",
+        "password": "spud",
+        "salt": "KJ21Tn9t",
+        "md5": "657bae1030ee275f78160b5d39a30663",
+        "sha1": "8d830949389d3be00e6bcf7c8e59af09206d821a",
+        "sha256": "c95c3e66d22149b9585c48dbe06796127497f2603cc2780e7fdb0881fb6d80cc"
+      },
+      "dob": {
+        "date": "1982-12-27T16:24:37.531Z",
+        "age": 42
+      },
+      "registered": {
+        "date": "2021-02-14T00:06:59.675Z",
+        "age": 4
+      },
+      "phone": "8998236845",
+      "cell": "7248655236",
+      "id": {
+        "name": "UIDAI",
+        "value": "257494736807"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/24.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/24.jpg"
+      },
+      "nat": "IN"
+    },
+    {
+      "gender": "female",
+      "name": {
+        "title": "Ms",
+        "first": "Angelika",
+        "last": "Prause"
+      },
+      "location": {
+        "street": {
+          "number": 72,
+          "name": "Am Bahnhof"
+        },
+        "city": "Elsterberg",
+        "state": "Rheinland-Pfalz",
+        "country": "Germany",
+        "postcode": 41600,
+        "coordinates": {
+          "latitude": "83.3053",
+          "longitude": "-127.9862"
+        },
+        "timezone": {
+          "offset": "-3:00",
+          "description": "Brazil, Buenos Aires, Georgetown"
+        }
+      },
+      "email": "angelika.prause@example.com",
+      "login": {
+        "uuid": "08b3a1c0-b401-4f81-8864-649c3d199ddb",
+        "username": "purplebear357",
+        "password": "erika",
+        "salt": "or6a4mRn",
+        "md5": "16e2c573e32e7d04a4c0c0d2f9862d66",
+        "sha1": "aa35b0dbd77ab647ccfca85b2fdbdc43becdfdae",
+        "sha256": "8b1c1f4a53dffdf03bdd1f4291679892afe32b8d67ad2874c9caa3a8a03cb4de"
+      },
+      "dob": {
+        "date": "1945-12-17T09:25:26.997Z",
+        "age": 79
+      },
+      "registered": {
+        "date": "2020-06-16T01:51:00.893Z",
+        "age": 4
+      },
+      "phone": "0857-2152589",
+      "cell": "0172-1204325",
+      "id": {
+        "name": "SVNR",
+        "value": "45 171245 P 704"
+      },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/49.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/49.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/49.jpg"
+      },
+      "nat": "DE"
+    }
+  ],
+  "info": {
+    "seed": "834120977a282ce7",
+    "results": 5,
+    "page": 1,
+    "version": "1.4"
+  }
+}
