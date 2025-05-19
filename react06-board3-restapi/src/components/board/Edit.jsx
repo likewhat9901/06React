@@ -67,7 +67,7 @@ function Edit(props) {
             .then((response)=> response.json())
             .then((json)=> console.log(json))
             .catch((error) => {
-              console.error("edit fetch 오류남")
+              console.error("edit fetch 오류남", error)
             });
 
           navigate('/list');

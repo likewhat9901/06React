@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 function View() {
+  const navigate = useNavigate();
   // 중첩된 라우팅에서 일련번호를 읽어오기 위한 Hook
   let params = useParams();
   console.log('idx', params.idx);
@@ -36,7 +37,35 @@ function View() {
     <nav>
       <Link to="/list">목록</Link>&nbsp;
       <Link to={"/edit/"+params.idx}>수정</Link>&nbsp;
-      <Link to="/delete">삭제</Link>
+      <Link onClick={()=>{
+        if(window.confirm('삭제하시겠습니까?')){
+          console.log('삭제idx', params.idx);
+          fetch("http://nakja.co.kr/APIs/php7/boardDeleteJSON.php", {
+            method: 'POST',
+            headers: {
+              'Content-type' : 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: new URLSearchParams({
+              tname: 'nboard_news',
+              idx: params.idx,
+              apikey: "a24565c6d695e4eae797e790330bacd0"
+            })
+          })
+          .then((result)=>{
+            return result.json();
+          })
+          .then((json)=>{
+            console.log(json, json.result);
+            if (json.result==='success') {
+              alert('삭제되었습니다.');
+              navigate("/list");
+            }
+            else{
+              alert('삭제에 실패했습니다.');
+            }
+          });
+        }
+      }}>삭제</Link>
     </nav>
     <article>
       <table id="boardTable">

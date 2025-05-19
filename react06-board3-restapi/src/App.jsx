@@ -13,13 +13,9 @@ function App() {
       <Route path="/list" element={<List />} />
       {/* 중첩라우팅으로 게시물의 일련번호가 하위경로 형태로 추가된다.
       이것을 useParams Hook을 통해 읽어올 수 있다. */}
-      <Route path="/view" element={<Outlet />}>
-        <Route path=":idx" element={<View />} />
-      </Route>
+      <Route path="/view/:idx" element={<View />} />
       <Route path="/write" element={<Write />} />
-      <Route path="/edit" element={<Outlet />}>
-        <Route path=":idx" element={<Edit />} />
-      </Route>
+      <Route path="/edit/:idx" element={<Edit />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
