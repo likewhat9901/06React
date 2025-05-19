@@ -9,10 +9,10 @@ function Edit(props) {
   const nowDate = props.nowDate;
 
   var params = useParams();
-  console.log('params:', params.no);
+  console.log('params:', Number(params.no));
   let pno = Number(params.no);
 
-  let vi = boardData.reduce((prev, curr)=>{
+  let vi = props.boardData.reduce((prev, curr)=>{
     if(curr.no === pno){
       prev = curr;
     }
