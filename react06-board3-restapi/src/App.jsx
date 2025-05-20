@@ -15,6 +15,8 @@ function App() {
       이것을 useParams Hook을 통해 읽어올 수 있다. */}
       <Route path="/view/:idx" element={<View />} />
       <Route path="/write" element={<Write />} />
+      {/* 수정의 경우에도 열람과 마찬가지로 수정할 게시물의 일련번호가 필요하므로
+      중첩라우팅으로 설정해야 한다. */}
       <Route path="/edit/:idx" element={<Edit />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

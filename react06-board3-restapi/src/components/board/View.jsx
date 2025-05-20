@@ -36,6 +36,7 @@ function View() {
     </header>
     <nav>
       <Link to="/list">목록</Link>&nbsp;
+      {/* 수정페이지로 진입시 일련번호가 필요하므로 링크를 수정한다. */}
       <Link to={"/edit/"+params.idx}>수정</Link>&nbsp;
       <Link onClick={()=>{
         if(window.confirm('삭제하시겠습니까?')){
@@ -55,6 +56,7 @@ function View() {
             return result.json();
           })
           .then((json)=>{
+            // 삭제 성공 시 목록으로 이동
             console.log(json, json.result);
             if (json.result==='success') {
               alert('삭제되었습니다.');
@@ -92,8 +94,12 @@ function View() {
             화면에 그대로 출력하는 것이 Default 설정이다. */}
             {/* <td>{boardData.content}</td> */}
             {/* 마크업이 적용된 상태로 출력된다. */}
-            <td dangerouslySetInnerHTML={{__html: boardData.content}}
-              style={{whiteSpace:"pre-wrap"}}></td>
+            {/* 이미지가 테이블 크기보다 큰 경우 450px로 맞춰서 출력. index.css에 설정 */}
+            <td 
+              className="tableImg"
+              dangerouslySetInnerHTML={{__html: boardData.content}}
+              style={{ whiteSpace:"pre-wrap" }}
+            ></td>
           </tr>
         </tbody>
       </table>
