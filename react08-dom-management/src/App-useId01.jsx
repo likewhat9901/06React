@@ -20,8 +20,7 @@ function MyInput(props) {
 }
 
 function App() {
-  /* 
-  useId()는 고유한 아이디를 생성할때 사용하는 훅이다. DOM의
+  /* useId()는 고유한 아이디를 생성할때 사용하는 훅이다. DOM의
   아이디를 부여하거나 라벨링을 할때 편리하다. */
   const myId = useId();
   console.log("myId", myId);
