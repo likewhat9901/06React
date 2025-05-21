@@ -14,6 +14,7 @@ function App() {
       setMessages((prev) => [...prev, event.data]);
     };
 
+    
     return () => socketRef.current.close(); // 연결 해제
   }, []);
 
