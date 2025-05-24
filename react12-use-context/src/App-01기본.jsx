@@ -17,12 +17,14 @@ function App() {
     }} />
     
     {/* 하위 컴포넌트로 props를 통해 데이터 전달 */}
+    {/* props drilling */}
     <div className="App">
       <h3>Props를 통한 데이터 전달</h3>
       <CompProps1 propData={'Props로 전달되는 데이터'} myNumber={myNumber} />
     </div>
 
     {/* 하위 컴포넌트로 props 없이 렌더링 */}
+    {/* context 초기값 사용 */}
     <div className="App">
       <h3>useContext 적용</h3>
       <CompContext1a />
@@ -31,6 +33,7 @@ function App() {
     {/* 컨텍스트 provider를 이용해서 하위 컴포넌트를 wrapping 한다.
     그러면 하위 컴포넌트는 provider가 제공하는 데이터를 공유할 수 있다.
     이 부분은 Redux와 유사한 방식이다. */}
+    {/* provider로 데이터 제공 */}
     <SimpleContext.Provider value={{str:'Provider의 초기값', num: myNumber}}>
       <div className="App">
         <h3>useContext 적용 및 Provider 래핑</h3>

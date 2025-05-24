@@ -1,18 +1,5 @@
 import { useState } from "react"
 
-// App 컴포넌트가 전달해준 Props를 다시 Page의 하위 컴포넌트로 전달
-const Page = ({isDark, setIsDark}) => {
-  return (
-    <div className="page">
-      {/* State 변수만 전달 */}
-      <Header isDark={isDark} />
-      <Content isDark={isDark} />
-      {/* State 변수, 함수를 같이 전달 */}
-      <Footer isDark={isDark} setIsDark={setIsDark} />
-    </div>
-  )
-}
-
 const Header = ({isDark}) => {
   // isDark에 따라 배경색과 글자색을 변경하도록 스타일 설정
   return (
@@ -51,6 +38,19 @@ const Footer = ({isDark, setIsDark}) => {
       }}>
       <input type="button" value="Dark Mode" className="button"
         onClick={toggleTheme} />
+    </div>
+  )
+}
+
+// App 컴포넌트가 전달해준 Props를 다시 Page의 하위 컴포넌트로 전달
+const Page = ({isDark, setIsDark}) => {
+  return (
+    <div className="page">
+      {/* State 변수만 전달 */}
+      <Header isDark={isDark} />
+      <Content isDark={isDark} />
+      {/* State 변수, 함수를 같이 전달 */}
+      <Footer isDark={isDark} setIsDark={setIsDark} />
     </div>
   )
 }

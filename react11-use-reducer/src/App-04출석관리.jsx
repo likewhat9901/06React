@@ -43,7 +43,7 @@ const reducer = (state, action) => {
       }
     case 'delete':
       return {
-
+        
       }
     case 'mark':
       return {

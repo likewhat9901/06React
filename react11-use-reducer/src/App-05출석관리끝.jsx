@@ -13,13 +13,22 @@ const Student = ({name, dispatch, id, isHere}) => {
       {/* 학생이 출석한 상태이면 가운데 줄과 회색으로 변경되는 스타일 추가
       isHere에 따라 토글 */}
       <span style={{
-          textDecoration: isHere ? 'line-through' : 'none',
-          color: isHere ? 'gray' : 'black',
-        }}
+        textDecoration: isHere ? 'line-through' : 'none',
+        color: isHere ? 'gray' : 'black',
+        cursor: "pointer",
+        transition: "transform 0.07s",
+        display: "inline-block"
+      }}
         onClick={()=>{
           /* 디스패치 함수 호출시 액션객체를 전달해서 상태를 변경.
           이때 Reducer함수가 실행. */
           dispatch({ type: 'mark', param: {id} })
+        }}
+        onMouseDown={(e)=>{
+          e.target.style.transform = "scale(0.9)";
+        }}
+        onMouseUp={(e)=>{
+          e.target.style.transform = "scale(1)";
         }}
       >{name}</span>
       {/* 삭제 버튼 */}
@@ -69,13 +78,9 @@ const reducer = (state, action) => {
         count: state.count,
         /* 학생수 변함이 없음으로 map사용.
         처리할 학생을 찾은 후 isHere만 true/false로 변경 */
-        students: state.students.map(
-          (student) => {
-            if (student.id === action.param.id) {
-              return {...student, isHere: !student.isHere}
-            }
-            
-            return student 
+        students: state.students.map((student) => {
+            return student.id === action.param.id ? 
+              {...student, isHere: !student.isHere} : student //뒤의 isHere은 덮어쓰기됨
           }
         )
       }
