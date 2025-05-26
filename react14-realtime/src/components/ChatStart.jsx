@@ -1,5 +1,6 @@
 import { useRef } from "react";
-import Navi from "../components/Navi";
+import Navi from "../components/Navi.jsx";
+import { useNavigate } from 'react-router-dom';
 
 function ChatStart() {
   // input 태그 DOM에 접근하기 위한 useRef변수 생성
@@ -9,6 +10,7 @@ function ChatStart() {
   const refRoom = useRef();
   // 접속자의 아이디
   const refId = useRef();
+  const navigate = useNavigate();
 
   /* open() 함수를 이용해서 채팅창을 팝업으로 오픈함.
     형식] open(팝업창의 요청URL, 창의이름, 창의속성);
@@ -18,8 +20,9 @@ function ChatStart() {
   const openChatWin = () => {
     /* useRef를 통해 참조한 input의 DOM을 이용해서 입력값을 얻어온다.
     그리고 팝업창을 띄울때 파라미터로 사용한다. 즉 대화창을 팝업으로 띄울때 방명과 대화명을 전달해야 한다. */
-    window.open(`/chat/talk?roomId=${refRoom.current.value}&userId=${refId.current.value}`,
-      '', 'width=500, height=700');
+    // window.open(`/chat/talk?roomId=${refRoom.current.value}&userId=${refId.current.value}`,
+    //   '', 'width=500, height=700');
+    navigate(`/chat/talk?roomId=${roomId}&userId=${userId}`);
   }
   
   return (<>

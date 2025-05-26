@@ -1,10 +1,10 @@
 import { realtime } from "./realtimeConfig";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
-import RealtimeCRUD from "./components/RealtimeCRUD";
-import Listener from "./components/Listener";
-import ChatStart from "./components/ChatStart";
-import ChatMessage from "./components/ChatMessage";
+import RealtimeCRUD from "./components/RealtimeCRUD.jsx";
+import Listener from "./components/Listener.jsx";
+import ChatStart from "./components/ChatStart.jsx";
+import ChatMessage from "./components/ChatMessage.jsx";
 
 function App() {
   console.log("realtime", realtime);
