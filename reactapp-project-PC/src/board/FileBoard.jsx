@@ -48,6 +48,7 @@ function FileBoard(props) {
     <nav>
       <Link to="/board">자유게시판</Link>
       <Link to="/board/qna">Q&A게시판</Link>
+      <Link to="/">Home</Link>
     </nav>
     <article>
       <table id="boardTable">

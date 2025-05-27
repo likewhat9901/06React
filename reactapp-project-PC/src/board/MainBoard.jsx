@@ -49,6 +49,7 @@ function MainBoard(props) {
     <nav>
       <Link to="qna">Q&A게시판</Link>
       <Link to="file">자료실게시판</Link>
+      <Link to="/">Home</Link>
     </nav>
     <article>
       <table id="boardTable">

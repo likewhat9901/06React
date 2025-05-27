@@ -48,6 +48,7 @@ function QnABoard(props) {
     <nav>
       <Link to="/board">자유게시판</Link>
       <Link to="/board/file">자료실게시판</Link>
+      <Link to="/">Home</Link>
     </nav>
     <article>
       <table id="boardTable">

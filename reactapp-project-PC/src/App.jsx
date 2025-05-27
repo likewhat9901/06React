@@ -1,21 +1,25 @@
 import { Routes, Route } from "react-router-dom";
 
-import Layout from "./layout/Layout";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
 import BoardRoutes from "./board/BoardRoutes";
-import LoginRoutes from "./member/login/LoginRoutes";
-import RegisterRoutes from "./member/register/RegisterRoutes";
+import MemberRoutes from "./member/MemberRoutes";
+import Talk from "./talk/Talk";
 
 function App() {
   
   return (<>
     <Routes>
-      <Route path="/" element={<Layout/>}>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />}></Route>
         <Route path="member">
-          {RegisterRoutes}
-          {LoginRoutes}
+          {MemberRoutes}
         </Route>
         <Route path="board">
           {BoardRoutes}
+        </Route>
+        <Route path="talk">
+          <Route index element={<Talk />}></Route>
         </Route>
       </Route>
     </Routes>
