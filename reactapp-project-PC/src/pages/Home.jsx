@@ -1,7 +1,7 @@
-import styles from './home.module.css';
+// import styles from './home.module.css';
 
-function Home() {
-  return (
+function name(params) {
+  return (<>
     <div className={styles.homeWrapper}>
       {/* 메인 배너 영역 */}
       <section className={styles.bannerSection}>
@@ -63,7 +63,14 @@ function Home() {
         </div>
       </section>
     </div>
-  );
+  
+  </>)
+}
+
+function Home() {
+  return (<>
+    <h2 style={{textAlign:'right'}}>홈</h2>
+  </>);
 }
 
 export default Home;

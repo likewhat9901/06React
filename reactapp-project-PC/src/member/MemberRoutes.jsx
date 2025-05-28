@@ -5,15 +5,9 @@ import EditPage from "./edit/EditPage";
 
 const MemberRoutes = (
   <>
-    <Route path='register'>
-      <Route index element={<RegisterPage />} />
-    </Route>
-    <Route path='login'>
-      <Route index element={<LoginPage />} />
-    </Route>
-    <Route path='edit'>
-      <Route index element={<EditPage />} />
-    </Route>
+    <Route path='register' element={<RegisterPage />}></Route>
+    <Route path='login' element={<LoginPage />}></Route>
+    <Route path='edit' element={<EditPage />}></Route>
   </>
 );
 
