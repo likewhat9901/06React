@@ -1,0 +1,172 @@
+.homeWrapper {
+  padding: 24px;
+  font-family: sans-serif;
+}
+
+/* 배너 */
+.bannerSection {
+  background: #f1f3f5;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.bannerText h2 {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.ctaLink {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: underline;
+}
+
+.bannerImage {
+  width: 200px;
+  height: 120px;
+  background-color: #ddd; /* 이미지 자리 */
+  border-radius: 10px;
+}
+
+.slideControls {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.slideNumber {
+  background: #666;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.navButtons button {
+  background: #ccc;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* 로그인 박스 */
+.loginBox {
+  margin-top: 24px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.profileIcon {
+  width: 60px;
+  height: 60px;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+}
+
+.loginBtn {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 정보 카드 */
+.infoCard {
+  background: #e8f0fe;
+  padding: 16px;
+  border-radius: 16px;
+  margin-top: 24px;
+  font-size: 14px;
+}
+
+.infoHeader {
+  font-size: 12px;
+  color: #666;
+}
+
+.infoHighlight {
+  font-weight: bold;
+  margin-top: 4px;
+  color: #1a73e8;
+}
+
+.trendTag {
+  background: black;
+  color: white;
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.trendText {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
+.trendDate {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 검색창 */
+.searchSection {
+  background-color: #1a73e8;
+  margin-top: 32px;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+}
+
+.searchInput {
+  width: 70%;
+  padding: 10px;
+  border-radius: 24px;
+  border: none;
+  font-size: 14px;
+}
+
+.searchButton {
+  margin-left: 8px;
+  background: white;
+  color: #1a73e8;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.hashtags {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hashtags span {
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+}

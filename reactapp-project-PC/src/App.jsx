@@ -4,7 +4,6 @@ import Layout from "./components/Layout";
 import Home from "./components/Home";
 import BoardRoutes from "./board/BoardRoutes";
 import MemberRoutes from "./member/MemberRoutes";
-import Talk from "./talk/Talk";
 
 function App() {
   
@@ -17,9 +16,6 @@ function App() {
         </Route>
         <Route path="board">
           {BoardRoutes}
-        </Route>
-        <Route path="talk">
-          <Route index element={<Talk />}></Route>
         </Route>
       </Route>
     </Routes>

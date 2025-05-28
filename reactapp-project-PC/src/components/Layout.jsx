@@ -1,47 +1,72 @@
-import { Outlet, Link, useLocation } from "react-router-dom";
-import Talk from "../talk/Talk";
-import styles from './components.module.css';
+import { useState } from "react";
+import { Outlet, Link } from "react-router-dom";
+import Talk from "./talk/Talk";
+import styles from './layout.module.css';
+import hamburger from '../images/hamburger_menu.png'
 
-function Layout() {
-  const location = useLocation();
-
-  const showTalk = location.pathname === '/talk';
-
+function TopNavi(props) {
+  
   return (<>
-    <header>
-      <h2>헤더</h2>
-      <button className={styles.button}><Link to="/member/register">회원가입</Link></button>
-      <Link to="/member/login">로그인</Link>
-      <Link to="/member/edit">회원수정</Link>
-      <Link to="/board">게시판</Link>
-      <Link to="/board/qna">Q&A게시판</Link>
-      <Link to="/board/file">자료게시판</Link>
-      <Link to="/talk">카카오톡</Link>
+    <header className={styles.header}>
+      <div className={styles.head_inner}>
+        <div className={styles.login_wrap}>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/member/login">로그인</Link></li>
+            <li><Link to="/member/register">회원가입</Link></li>
+            <li><Link to="/member/edit">회원수정</Link></li>
+          </ul>
+        </div>
+        <div className={styles.gnb_wrap}>
+          <h1 className={styles.gnb_logo}>
+            <a href="/"><img src="/" alt="LOGO" /></a>
+          </h1>
+          <nav className={styles.gnb_menu}>
+            <ul>
+              <li><Link to="/board">게시판</Link></li>
+              <li><Link to="/board/qna">Q&A게시판</Link></li>
+              <li><Link to="/board/file">자료게시판</Link></li>
+            </ul>
+          </nav>
+          <div className={styles.util_menu}>
+            <img src={hamburger} alt="" />
+          </div>
+        </div>
+      </div>
     </header>
-    <section style={{
-      width: '100%', height: '600px',
-      border: '1px solid #ccc'
-    }}>
-      <Outlet />
-    </section>
-    <footer>
+  </>) 
+}
+
+function Footer(props) {
+  
+  return (<>
+    <footer>  
       <h2>푸터</h2>
     </footer>
+  </>) 
+}
+
+function Layout() {
+  const [showTalk, setShowTalk] = useState(false);
+
+  return (<div className={styles.body}>
+    <TopNavi />
+    <section className={styles.outlet}>
+      <Outlet />
+    </section>
+    <Footer />
+
+    <button onClick={() => setShowTalk(!showTalk)}
+      className={styles.chat_button}
+    >
+        {showTalk ? "채팅 닫기" : "채팅 열기"}
+    </button>
     {showTalk && (
-      <div style={{
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        width: '400px',
-        height: '600px',
-        backgroundColor: '#fff',
-        border: '1px solid #ccc',
-        boxShadow: '0 0 10px rgba(0,0,0,0.2)'
-      }}>
+      <div className={styles.chat_div}>
         <Talk />
       </div>
     )}
-  </>) 
+  </div>) 
 }
 
 export default Layout;
