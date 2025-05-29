@@ -1,10 +1,10 @@
 import { Route } from 'react-router-dom';
-import MainBoard from './MainBoard';
-import QnABoard from './QnABoard';
-import FileBoard from './FileBoard';
-import MainView from './view/MainView';
-import QnAView from './view/QnAView';
-import FileView from './view/FileView';
+import MainBoard from '../pages/boards/MainBoard';
+import QnABoard from '../pages/boards/QnABoard';
+import FileBoard from '../pages/boards/FileBoard';
+import MainView from '../pages/boards/view/MainView';
+import QnAView from '../pages/boards/view/QnAView';
+import FileView from '../pages/boards/view/FileView';
 
 const BoardRoutes = (
     <>

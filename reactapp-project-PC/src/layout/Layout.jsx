@@ -2,12 +2,9 @@ import { Outlet } from "react-router-dom";
 
 import css from "./Layout.module.css";
 
-import Talk from "../components/Chat";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Chat from "@/components/Chat";
-
-
+// import Chat from "@/features/Chat";
 
 
 function Layout() {

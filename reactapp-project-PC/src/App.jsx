@@ -2,9 +2,10 @@ import { Routes, Route } from "react-router-dom";
 
 import Layout from "./layout/Layout";
 import Home from "./pages/Home";
-// import RegisterPage from "./register/RegisterPage";
-// import LoginPage from "./login/LoginPage";
-// import EditPage from "./edit/EditPage";
+import Register from "./pages/members/Register";
+import Login from "./pages/members/Login";
+import EditProfile from "./pages/members/EditProfile";
+// import MainBoard from "./pages/boards/main/MainBoard";
 // import MainBoard from './MainBoard';
 // import QnABoard from './QnABoard';
 // import FileBoard from './FileBoard';
@@ -22,12 +23,12 @@ function App() {
         <Route index element={<Home />}></Route>
 
         {/* Member Page */}
-        {/* <Route path="member">
-          <Route path='login' element={<LoginPage />}></Route>
-          <Route path='register' element={<RegisterPage />}></Route>
-          <Route path='edit' element={<EditPage />}></Route>
-        </Route> */}
-
+        <Route path="member">
+          <Route path='register' element={<Register />}></Route>
+          <Route path='login' element={<Login />}></Route>
+          <Route path='edit' element={<EditProfile />}></Route>
+        </Route>
+        
         {/* Main Board */}
         {/* <Route path="main">
           <Route index element={<MainBoard />} />

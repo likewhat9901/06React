@@ -29,8 +29,14 @@ function GNB() {
           <li><Link to="/board/file">자료게시판</Link></li>
         </ul>
       </nav>
-      <div >
-        <h2>햄버거 메뉴바</h2>
+      <div>
+        <label htmlFor="toggle" className={css.menu_btn}>☰</label>
+        <input type="checkbox" id="toggle" hidden />
+        <div className={css.menu}>
+          <p><a href="#">Home</a></p>
+          <p><a href="#">About</a></p>
+          <p><a href="#">Contact</a></p>
+        </div>
       </div>
     </div>
   </>)

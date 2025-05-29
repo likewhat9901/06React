@@ -53,7 +53,7 @@ select {
   box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-input[name="userid"]{
+input[name="id"]{
   width: 79%;
 }
 input[type="tel"]{
@@ -120,7 +120,7 @@ button[type="submit"]:hover {
 }
 
 /* 우편번호 */
-input[name='zipcode']{
+input[name='postcode']{
   width: 150px;
 }
 input[name='detailAddress']{
