@@ -26,7 +26,7 @@ function App() {
         <Route path="member">
           <Route path='register' element={<Register />}></Route>
           <Route path='login' element={<Login />}></Route>
-          {/* <Route path='edit' element={<EditProfile />}></Route> */}
+          <Route path='edit' element={<EditProfile />}></Route>
         </Route>
         
         {/* Main Board */}

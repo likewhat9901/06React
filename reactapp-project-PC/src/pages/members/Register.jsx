@@ -30,8 +30,7 @@ const handleRegisterSubmit = async (e) => {
   const pw = e.target.pw.value.trim();
   const name = e.target.name.value.trim();
   const email = `${e.target.emailId.value.trim()}@${e.target.emailDomain.value.trim()}`;
-  const phone = `${e.target.phone1.value.trim()}-${e.target.phone2.value.trim()}
-                  -${e.target.phone3.value.trim()}`;
+  const phone = `${e.target.phone1.value.trim()}-${e.target.phone2.value.trim()}-${e.target.phone3.value.trim()}`;
   const postcode = e.target.postcode.value.trim();
   const address = `${e.target.address.value.trim()} | ${e.target.detailAddress.value.trim()} | ${e.target.extraAddress.value.trim()}`;
 
@@ -210,7 +209,7 @@ function Register() {
               <input type="text" name="emailDomain" placeholder="도메인" required 
                 value={emailDomain} ref={emailDomainRef}
                 onChange={(e) => setEmailDomain(e.target.value)}/>
-              <select name="emailSelect"
+              <select name="emailSelect" defaultValue={1}
                 onChange={handleEmailSelect}>
                 <option value="">직접 입력</option>
                 <option value="gmail.com">gmail.com</option>
