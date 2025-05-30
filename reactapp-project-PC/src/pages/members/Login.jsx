@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 
@@ -23,30 +23,22 @@ const saveLocalStorage = async (id, pw) => {
   console.log('user', userInfo);
 };
 
-const logout = () => {
-  localStorage.removeItem("user");
-};
-
-/* 저장된 로그인 정보 확인 */
-const isLoggedIn = () => {
-  const user = localStorage.getItem("user"); // 또는 "token", "userId" 등 저장한 키 이름
-  return user !== null; //null이 아닐때 true
-};
-
 /* Main Component */
 function Login() {
-  
-  /* 로그인 상태 확인 */
-  useEffect(()=>{
-    if (isLoggedIn()) {
-      console.log("로그인 상태입니다.");
-      alert("환영합니다.");
-    } else {
-      console.log("로그아웃 상태입니다.");
-    }
-  }, []);
-  
   const navigate = useNavigate();
+
+  /* 로그인 상태 확인 */
+  const [user, setUser] = useState(() => {
+    // 최초 렌더링 시 localStorage에서 user를 읽어옴
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  /* 로그아웃 */
+  const logout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
   
   /* 로그인 Submit */
   const handleLoginSubmit = async (e) => {
@@ -65,7 +57,7 @@ function Login() {
         console.log("로그인 성공", docSnap.data());
         /* localStorage에 로그인 정보 저장 */
         saveLocalStorage(loginId, loginPw);
-        navigate('/');
+        // navigate('/');
       }
       else {
         console.log("비밀번호 다름. 로그인 실패");
@@ -102,13 +94,21 @@ function Login() {
         </div>
 
         <button type="submit" className={css.loginBtn}>로그인</button>
-        {isLoggedIn() && <button type="button"
-          onClick={logout}>로그아웃</button>}
 
         <div className={css.footer}>
           <a href="register">회원가입</a>
           <span>|</span>
           <a href="#">아이디 찾기 · 비밀번호 변경</a>
+        </div>
+        <div>
+          {user ? (
+            <>
+              <p>안녕하세요, {user.id}님!</p>
+              <button onClick={logout}>로그아웃</button>
+            </>
+          ) : (
+            <p>로그인되지 않았습니다.</p>
+          )}
         </div>
       </form>
     </div>
