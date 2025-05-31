@@ -1,8 +1,9 @@
 import { useRef, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import { firestore } from "@/features/firestore"
+import { doc, getDoc, setDoc } from "firebase/firestore";
+
 import styles from "./Register.module.css";
 import DaumPostcode from "@/features/DaumPostCode";
 

@@ -24,7 +24,7 @@ function GNB() {
       </a>
       <nav className={css.gnb_menu}>
         <ul>
-          <li><Link to="/board">게시판</Link></li>
+          <li><Link to="/board/main">게시판</Link></li>
           <li><Link to="/board/qna">Q&A게시판</Link></li>
           <li><Link to="/board/file">자료게시판</Link></li>
         </ul>

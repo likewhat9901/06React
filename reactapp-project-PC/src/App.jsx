@@ -6,7 +6,8 @@ import Home from "./pages/Home";
 import Register from "./pages/members/Register";
 import Login from "./pages/members/Login";
 import EditProfile from "./pages/members/EditProfile";
-// import MainBoard from "./pages/boards/main/MainBoard";
+import MainBoard from "./pages/boards/main/MainBoard";
+import MainWrite from "./pages/boards/main/MainWrite";
 // import MainBoard from './MainBoard';
 // import QnABoard from './QnABoard';
 // import FileBoard from './FileBoard';
@@ -30,11 +31,12 @@ function App() {
           <Route path='edit' element={<EditProfile />}></Route>
         </Route>
         
-        {/* Main Board */}
-        {/* <Route path="main">
+        {/* Boards Page */}
+        <Route path="board/main">
           <Route index element={<MainBoard />} />
-          <Route path="view/:id" element={<MainView />} />
-        </Route> */}
+          <Route path="write" element={<MainWrite />} />
+          {/* <Route path="view/:id" element={<MainView />} /> */}
+        </Route>
 
         {/* QnA Board */}
         {/* <Route path="qna">

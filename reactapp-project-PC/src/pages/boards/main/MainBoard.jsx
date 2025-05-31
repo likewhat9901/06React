@@ -1,46 +1,42 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function MainBoard(props) {
-  // API 데이터는 배열이므로 초기값은 빈 배열로 설정
-  let [boardData, setBoardData] = useState([]);
+import { firestore } from "@/features/firestore"
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 
-  useEffect(function(){
-    // 게시판 목록 요청
-    fetch("http://nakja.co.kr/APIs/php7/boardListJSON.php?tname=nboard_news&"
-      +"apikey=a24565c6d695e4eae797e790330bacd0")
-      .then((result)=>{
-        return result.json();
-      })
-      .then((json)=>{
-        console.log(json);
-        // State 변경
-        setBoardData(json);
-      });
-    return ()=>{
-      console.log('useEffect실행==>컴포넌트 언마운트');
+import css from "./MainBoard.module.css";
+
+/* DB에 저장된 게시판 데이터 불러오기 */
+const getPosts = async (boardType) => {
+  // 'MainBoard' 컬렉션 참조 가져오기
+  const mainBoardCollection = collection(firestore, 'boards');
+  const postRef = query(mainBoardCollection, 
+    where('boardType', '==', boardType), orderBy('createdAt', 'desc'));
+  const postSnap = await getDocs(postRef);
+
+  return postSnap;
+}
+
+const formatDate = (timestamp) => {
+  const dt = timestamp.toDate();
+  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+};
+
+function MainBoard() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const postSnap = await getPosts('main'); // boardType: 'main'의 postSnap 반환
+      const postsArray = postSnap.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setPosts(postsArray);
     }
-  }, []);
+    fetchData();
 
-  let lists = [];
-  // 데이터의 개수만큼 반복해서 tr태그 생성
-  for(let row of boardData){
-    // console.log(row);
-    // 작성일과 제목은 적당한 길이로 잘라서 출력한다.
-    let date = row.regdate.substring(0, 10);
-    let subject = row.subject.substring(0,20);
-    lists.push(
-      // tr태그에는 중복되지 않는 key prop 추가
-      <tr key={row.idx}>
-        <td className="cen">{row.idx}</td>
-        {/* 열람에서는 중첩된 라우팅을 통해 게시물의 일련번호를 추출 */}
-        {/* <td><Link to={"/view/"+row.idx}>{subject}</Link></td> */}
-        <td><Link to={"view/"+row.idx}>{subject}</Link></td>
-        <td className="cen">{row.name}</td>
-        <td className="cen">{date}</td>
-      </tr>
-    );
-  }
+  }, []);
 
   return (<div>
     <header>
@@ -50,9 +46,11 @@ function MainBoard(props) {
       <Link to="qna">Q&A게시판</Link>
       <Link to="file">자료실게시판</Link>
       <Link to="/">Home</Link>
+      <Link to="write">글쓰기</Link>
     </nav>
     <article>
-      <table id="boardTable">
+      <table className={css.boardTable}>
+        {/* thead */}
         <thead>
           <tr>
             <th>No</th>
@@ -61,9 +59,21 @@ function MainBoard(props) {
             <th>날짜, 시간</th>
           </tr>
         </thead>
-        {/* 앞에서 만든 tr태그를 여기서 출력 */}
+        {/* tbody */}
         <tbody>
-          {lists}
+          {posts.map((post) => {
+            const date = formatDate(post.createdAt);
+            return (
+              <tr key={post.id}>
+                <td className="cen">{post.id}</td>
+                <td>
+                  <Link to={"view/" + post.id}>{post.title}</Link>
+                </td>
+                <td className="cen">{post.writer}</td>
+                <td className="cen">{date}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </article>
