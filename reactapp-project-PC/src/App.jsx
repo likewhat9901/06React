@@ -6,14 +6,21 @@ import Home from "./pages/Home";
 import Register from "./pages/members/Register";
 import Login from "./pages/members/Login";
 import EditProfile from "./pages/members/EditProfile";
-import MainBoard from "./pages/boards/main/MainBoard";
-import MainWrite from "./pages/boards/main/MainWrite";
-// import MainBoard from './MainBoard';
-// import QnABoard from './QnABoard';
+import Boardlists from "./pages/boards/BoardLists";
+import BoardWrite from "./pages/boards/BoardWrite";
+import BoardView from "./pages/boards/BoardView";
+import BoardEdit from "./pages/boards/BoardEdit";
+
+// import MainBoard from "./pages/boards/main/MainBoard";
+// import MainWrite from "./pages/boards/main/MainWrite";
+// import MainView from './pages/boards/main/MainView';
+// import MainEdit from './pages/boards/main/MainEdit';
+// import QnABoard from './pages/boards/qna/QnABoard';
 // import FileBoard from './FileBoard';
-// import MainView from './view/MainView';
 // import QnAView from './view/QnAView';
 // import FileView from './view/FileView';
+
+import ClassRoom from "./temp/ClassRoom";
 
 
 function App() {
@@ -30,16 +37,24 @@ function App() {
           <Route path='login' element={<Login />}></Route>
           <Route path='edit' element={<EditProfile />}></Route>
         </Route>
+
+        <Route path="board/:type">
+          <Route path="lists" element={<Boardlists />} />
+          <Route path="write" element={<BoardWrite />} />
+          <Route path="view/:id" element={<BoardView />} />
+          <Route path="edit/:id" element={<BoardEdit />} />
+        </Route>
         
         {/* Boards Page */}
-        <Route path="board/main">
+        {/* <Route path="board/main">
           <Route index element={<MainBoard />} />
           <Route path="write" element={<MainWrite />} />
-          {/* <Route path="view/:id" element={<MainView />} /> */}
-        </Route>
+          <Route path="view/:id" element={<MainView />} />
+          <Route path="edit/:id" element={<MainEdit />} />
+        </Route> */}
 
         {/* QnA Board */}
-        {/* <Route path="qna">
+        {/* <Route path="/board/qna">
           <Route index element={<QnABoard />} />
           <Route path="view/:id" element={<QnAView />} />
         </Route> */}
@@ -49,6 +64,7 @@ function App() {
           <Route index element={<FileBoard />} /> */}
           {/* <Route path="view/:id" element={<FileView />} /> */}
         {/* </Route> */}
+        <Route path="classroom" element={<ClassRoom />}></Route>
       </Route>
     </Routes>
   </>) 

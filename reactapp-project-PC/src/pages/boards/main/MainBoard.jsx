@@ -10,11 +10,11 @@ import css from "./MainBoard.module.css";
 const getPosts = async (boardType) => {
   // 'MainBoard' 컬렉션 참조 가져오기
   const mainBoardCollection = collection(firestore, 'boards');
-  const postRef = query(mainBoardCollection, 
+  const boardRef = query(mainBoardCollection, 
     where('boardType', '==', boardType), orderBy('createdAt', 'desc'));
-  const postSnap = await getDocs(postRef);
+  const boardSnap = await getDocs(boardRef);
 
-  return postSnap;
+  return boardSnap;
 }
 
 const formatDate = (timestamp) => {
@@ -22,13 +22,14 @@ const formatDate = (timestamp) => {
   return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
 };
 
+
 function MainBoard() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const postSnap = await getPosts('main'); // boardType: 'main'의 postSnap 반환
-      const postsArray = postSnap.docs.map(doc => ({
+      const boardSnap = await getPosts('main'); // boardType: 'main'의 boardSnap 반환
+      const postsArray = boardSnap.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
       }));

@@ -9,7 +9,7 @@ import css from './Login.module.css';
 
 /* DB에서 Account 정보 가져오기 */
 const getAcc = async (loginId) => {  
-  const docRef = doc(firestore, "Members", loginId);
+  const docRef = doc(firestore, "members", loginId);
   const docSnap = await getDoc(docRef);
 
   return docSnap;

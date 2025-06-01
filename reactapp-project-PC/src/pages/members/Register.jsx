@@ -9,16 +9,16 @@ import DaumPostcode from "@/features/DaumPostCode";
 
 
 const initialState = {
-  id: "",
+  id: '',
   idValid: null,
-  pw: "",
-  pwCheck: "",
+  pw: '',
+  pwCheck: '',
   pwValid: null,
-  name: "",
-  email: { id: "", domain: ""},
-  phone: ["", "", ""],
-  postcode: "",
-  address: { base: "", detail: "", extra: "" }
+  name: '',
+  email: { id: '', domain: ''},
+  phone: ['', '', ''],
+  postcode: '',
+  address: { base: '', detail: '', extra: '' }
 };
 
 function reducer(state, action) {
@@ -62,7 +62,7 @@ function reducer(state, action) {
 
 /* Account - 계정만들기 $$$$$*/
 const memberWrite = async (memberData) => {
-  await setDoc(doc(firestore, "Members", memberData.id), memberData);
+  await setDoc(doc(firestore, "members", memberData.id), memberData);
   console.log("입력성공");
 };
 
@@ -76,7 +76,7 @@ function Register() {
   const idRef = useRef();
 
   const checkID = async () => {  
-    const docRef = doc(firestore, "Members", state.id);
+    const docRef = doc(firestore, "members", state.id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("이미 존재하는 아이디입니다.", docSnap.data());

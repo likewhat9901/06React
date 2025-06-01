@@ -13,7 +13,7 @@ const MemberDB = async () => {
   const userId = JSON.parse(localStorage.getItem("user")).id; // 문자열 → 객체
   console.log('user_id',userId);
 
-  const docSnap = await getDoc(doc(firestore, "Members", userId));
+  const docSnap = await getDoc(doc(firestore, "members", userId));
   const docData = docSnap.data();
 
   const [emailId = "", emailDomain = ""] = docData.email.split("@");
@@ -87,7 +87,7 @@ function reducer(state, action) {
 
 /* Account - 계정만들기 $$$$$*/
 const memberEdit = async (memberData) => {
-  await setDoc(doc(firestore, "Members", memberData.id), memberData, { merge: true });
+  await setDoc(doc(firestore, "members", memberData.id), memberData, { merge: true });
   console.log("입력성공");
 };
 
@@ -112,7 +112,7 @@ function Register() {
   const idRef = useRef();
 
   const checkID = async () => {  
-    const docRef = doc(firestore, "Members", state.id);
+    const docRef = doc(firestore, "members", state.id);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
       console.log("이미 존재하는 아이디입니다.", docSnap.data());

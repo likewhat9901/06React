@@ -1,5 +1,7 @@
 // import styles from './home.module.css';
 
+import { Link } from "react-router-dom";
+
 function name(params) {
   return (<>
     <div className={styles.homeWrapper}>
@@ -70,6 +72,7 @@ function name(params) {
 function Home() {
   return (<>
     <h2 style={{textAlign:'right'}}>홈</h2>
+    <Link to='classroom'>교실</Link>
   </>);
 }
 

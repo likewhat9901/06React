@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { firestore } from "@/features/firestore"
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, deleteDoc, getDocs  } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { query, where, orderBy } from "firebase/firestore";
 
 /* DB에 저장된 게시판 데이터 불러오기 */
 const getPost = async (postID) => {
@@ -26,7 +28,7 @@ const formatDate = (timestamp) => {
   return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
 };
 
-function MainView() {
+function BoardView() {
   let params = useParams();
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
@@ -52,6 +54,40 @@ function MainView() {
     }
     fetchData();
 
+  }, [params.id]);
+
+
+  /* 댓글 기능 */
+  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!comment.trim()) return;
+
+    await addDoc(collection(firestore, "comments"), {
+      postId: params.id,
+      text: comment,
+      createdAt: serverTimestamp(),
+    });
+
+    setComment(""); // 입력창 초기화
+    fetchComments(); // 다시 불러오기
+  };
+
+  const fetchComments = async () => {
+    const q = query(
+      collection(firestore, "comments"),
+      where("postId", "==", params.id),
+      orderBy("createdAt", "asc")
+    );
+    const snapshot = await getDocs(q);
+    const fetchedComments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setComments(fetchedComments);
+  };
+
+  useEffect(() => {
+    fetchComments();
   }, [params.id]);
   
   return (<>
@@ -91,8 +127,24 @@ function MainView() {
           </tr>
         </tbody>
       </table>
+      <form onSubmit={handleCommentSubmit}>
+        <input
+          type="text"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="댓글을 입력하세요"
+        />
+        <button type="submit">댓글 작성</button>
+        <ul>
+          {comments.map((c) => (
+            <li key={c.id}>
+              <p>{c.text}</p>
+            </li>
+          ))}
+        </ul>
+      </form>
     </article>
   </>) 
 }
 
-export default MainView;
+export default BoardView;
