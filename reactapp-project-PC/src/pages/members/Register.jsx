@@ -166,7 +166,7 @@ function Register() {
             <td className={styles.flexRow}>
               <input type="text" id="id" name="id" value={state.id} ref={idRef} required
                 onChange={(e) => dispatch({ type: "SET_ID", value: e.target.value })} />
-              <button type="button" onClick={checkID}>중복확인</button><br />
+              <button type="button" onClick={checkID}>중복확인</button>
               {state.id && typeof state.idValid === "boolean" && (
                 <span style={{ color: state.idValid ? "blue" : "red", fontSize: "14px" }} >
                   {state.idValid ? "사용 가능한 아이디입니다." : "이미 존재하는 아이디입니다."}

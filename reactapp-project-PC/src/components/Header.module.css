@@ -9,16 +9,16 @@
 /* Header */
 .header {
   font-family: "SBAggroB", sans-serif;
-  width: 100%; height: 100px; padding: 0 10px;
+  width: 100%; height: 120px; padding: 0 10px;
   position: sticky; top: 0;
   background: white; border-bottom: 1px solid #ccc;
   color: #2e2e2e; box-sizing: border-box;
 }
 /* TopNav */
 .topNav{
-  height: 40px;
+  height: 60px;
   display: flex; justify-content: flex-end; align-items: center;
-  padding-top: 15px;
+  padding-top: 30px;
 }
 .topNav ul{
   display: flex;
@@ -120,7 +120,7 @@
 /* GNB - Menu div */
 .menu {
   position: absolute;
-  top: 100px;
+  top: 120px;
   right: 0;
   width: 100%;
   height: 200px;

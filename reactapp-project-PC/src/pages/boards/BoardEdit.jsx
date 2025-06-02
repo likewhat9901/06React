@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { firestore } from "@/features/firestore"
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+
+import css from "./BoardEdit.module.css"
 
 /* DB에 저장된 게시판 데이터 불러오기 */
 const getPost = async (postID) => {
@@ -26,6 +28,7 @@ const formatDate = (timestamp) => {
 };
 
 function BoardEdit() {
+  const navigate = useNavigate();
   let params = useParams();
   const [formState, setFormState] = useState({
       id: '', writer: '', title: '', date: '', contents: '',
@@ -59,14 +62,17 @@ function BoardEdit() {
   };
   
   return (<>
-    <article>
-      <h2>Edit 페이지</h2>
-      <Link to={`../view/${formState.id}`}>보기</Link>
+    <div className={css.editContainer}>
+      <div className={css.editHeader}>
+        <h2>Edit 페이지</h2>
+      </div>
+
       <form onSubmit={(e)=>{
         e.preventDefault();
         updatePost(params.id, formState);
+        navigate(`../view/${formState.id}`);
       }}>
-        <table id="boardTable">
+        <table className={css.editTable}>
           <colgroup>
             <col width="20%" />
             <col width="*" />
@@ -87,14 +93,14 @@ function BoardEdit() {
             </tr>
             <tr>
               <th>내용</th>
-              <td><input type="text" name="contents"
+              <td><textarea type="text" name="contents"
                 value={formState.contents} onChange={handleInputChange}/></td>
             </tr>
           </tbody>
         </table>
-        <button type="submit">수정완료</button>
+        <button type="submit" className={css.submitBtn}>수정완료</button>
       </form>
-    </article>
+    </div>
   </>) 
 }
 

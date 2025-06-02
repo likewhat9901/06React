@@ -9,9 +9,10 @@ function TopNav() {
   return (<>
     <nav className={css.topNav}>
       <ul>
-        {user ? (
+        {user ? (<>
+          <li >{`안녕하세요, ${user.id} 님`}</li> 
           <li onClick={logout}>로그아웃</li> 
-        ) : (
+        </>) : (
           <li><Link to="/member/login">로그인</Link></li>
         )}
         {user ? (

@@ -5,10 +5,11 @@ import { firestore } from "@/features/firestore"
 import { doc, getDoc, deleteDoc, getDocs } from "firebase/firestore";
 import { collection, query, where, orderBy } from "firebase/firestore";
 
-import WriteCommentModal from "./WriteCommentModal";
-import EditCommentModal from "./EditCommentModal";
-import CommentSection from "./CommentSection";
-import { formatDate } from "./dateUtils";
+import WriteCommentModal from "./components/WriteCommentModal";
+import EditCommentModal from "./components/EditCommentModal";
+import CommentSection from "./components/CommentSection";
+import { formatDate } from "./utils/dateUtils";
+import css from "./BoardView.module.css"
 
 /* DB에 저장된 게시판 데이터 불러오기 */
 const getPost = async (postID) => {
@@ -39,7 +40,7 @@ function BoardView() {
   const handleDelete = async () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       await deletePost(postId);
-      navigate("../");
+      navigate("../lists");
     }
   };
 
@@ -89,14 +90,17 @@ function BoardView() {
   
   
   return (<>
-    <article>
-      <h2>View 페이지</h2>
-      <Link to={`../edit/${formState.postId}`}>수정</Link>
-      <button type="button" onClick={handleDelete}>삭제</button>
-      <table id="boardTable">
+    <div className={css.viewContainer}>
+      <div className={css.viewHeader}>
+        <h2>View 페이지</h2>
+        <div className={css.viewActions}>
+          <Link to={`../edit/${formState.postId}`}>수정</Link>
+          <button type="button" onClick={handleDelete}>삭제</button>
+        </div>
+      </div>
+      <table className={css.viewTable}>
         <colgroup>
-          <col width="20%" />
-          <col width="*" />
+
         </colgroup>
         <tbody>
           <tr>
@@ -113,30 +117,29 @@ function BoardView() {
           </tr>
           <tr>
             <th>내용</th>
-            <td>{formState.contents}</td>
+            <td className={css.viewTableContents}>{formState.contents}</td>
           </tr>
         </tbody>
       </table>
 
-      <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
+      <button className={css.commentBtn} data-bs-toggle="modal" data-bs-target="#commentModal">
         댓글 작성
       </button>
-      <WriteCommentModal 
-        postId={postId}
-        fetchComments={fetchComments}
-      />
-      <CommentSection 
-        comments={comments}
-        fetchComments={fetchComments}
-        setEditComment={setEditComment}
-      />
-      <EditCommentModal
-        editComment={editComment}
-        fetchComments={fetchComments}
-        setEditComment={setEditComment}
-      />
-
-    </article>
+    </div>
+    <WriteCommentModal 
+      postId={postId}
+      fetchComments={fetchComments}
+    />
+    <CommentSection 
+      comments={comments}
+      fetchComments={fetchComments}
+      setEditComment={setEditComment}
+    />
+    <EditCommentModal
+      editComment={editComment}
+      fetchComments={fetchComments}
+      setEditComment={setEditComment}
+    />
   </>)
 }
 

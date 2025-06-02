@@ -1,0 +1,106 @@
+.boardContainer {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.boardHeader {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.boardNav {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.boardNav a {
+  text-decoration: none;
+  padding: 8px 14px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  color: #333;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+.boardNav a:hover {
+  background: #dbeafe;
+}
+
+.boardNavBottom {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.boardNavBottom a {
+  text-decoration: none;
+  padding: 8px 14px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  color: #333;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+.boardNavBottom a:hover {
+  background: #dbeafe;
+}
+
+
+.boardTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.boardTable th,
+.boardTable td {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 15px;
+  color: #333;
+}
+
+.boardTable th {
+  background: #f9f9f9;
+  font-weight: 600;
+  color: #333;
+}
+
+.boardTable td a {
+  /* color: #3366cc; */
+  color: #333;
+  text-decoration: none;
+}
+.boardTable td a:hover {
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.pagination {
+  text-align: center;
+}
+.pagination button {
+  margin: 0 4px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+.pagination button:hover {
+  background: #eef;
+}
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

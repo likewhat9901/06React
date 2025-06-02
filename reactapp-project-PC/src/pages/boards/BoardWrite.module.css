@@ -1,0 +1,65 @@
+.writeContainer {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.writeForm select {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.writeTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.writeTable th,
+.writeTable td {
+  padding: 14px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.writeTable th {
+  width: 120px;
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: #333;
+}
+
+.writeTable input[type="text"],
+.writeTable textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.writeSubmit {
+  display: block;
+  margin-left: auto;
+  padding: 12px 24px;
+  font-size: 15px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.writeSubmit:hover {
+  background-color: #303f9f;
+}

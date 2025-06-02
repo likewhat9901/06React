@@ -1,0 +1,88 @@
+.editContainer {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.editHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.editHeader h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.editHeader a {
+  background: #f3f3f3;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+}
+
+.editHeader a:hover {
+  background: #e5efff;
+}
+
+/* Form Table */
+.editTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.editTable th {
+  text-align: left;
+  width: 120px;
+  background: #f9f9f9;
+  padding: 12px;
+  font-weight: 600;
+  color: #444;
+  border-bottom: 1px solid #eee;
+}
+
+.editTable td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.editTable input[type="text"],
+.editTable textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.editTable textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Submit Button */
+.submitBtn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 24px;
+  font-size: 15px;
+  background-color: #3f51b5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submitBtn:hover {
+  background-color: #303f9f;
+}

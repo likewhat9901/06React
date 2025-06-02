@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { firestore } from "@/features/firestore"
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
+import css from "./BoardWrite.module.css"
 
 const addPost = async (postData) => {  
   await addDoc(collection(firestore, 'boards'), {
@@ -12,6 +15,7 @@ const addPost = async (postData) => {
 }
 
 function BoardWrite() {
+  const navigate = useNavigate();
   const [formState, setFormState] = useState({
     boardType: '',
     writer: '',
@@ -26,38 +30,41 @@ function BoardWrite() {
   };
   
   return (<>
-      <form onSubmit={(e) => {
+      <form className={css.writeForm} onSubmit={(e) => {
         e.preventDefault();
         addPost(formState);
         console.log("submit 완료");
+        navigate('../lists');
       }}>
-        <select name="boardType" required
-          value={formState.boardType} onChange={handleInputChange} >
-          <option value="">--게시판 선택--</option>
-          <option value="main">자유게시판</option>
-          <option value="qna">Q&A게시판</option>
-          <option value="file">자료게시판</option>
-        </select>
-        <table id="boardTable">
-          <tbody>
-            <tr>  
-              <th>작성자</th>
-              <td><input type="text" name="writer"
-                value={formState.writer} onChange={handleInputChange} /></td>
-            </tr>
-            <tr>
-              <th>제목</th>
-              <td><input type="text" name="title"
-                value={formState.title} onChange={handleInputChange} /></td>
-            </tr>
-            <tr>
-              <th>내용</th>
-              <td><textarea name="contents" cols="22" rows="3"
-                value={formState.contents} onChange={handleInputChange} ></textarea></td>
-            </tr>
-          </tbody>
-        </table>
-        <input type="submit" value="전송" />
+        <div className={css.writeContainer}>
+          <select name="boardType" required
+            value={formState.boardType} onChange={handleInputChange} >
+            <option value="">--게시판 선택--</option>
+            <option value="main">자유게시판</option>
+            <option value="qna">Q&A게시판</option>
+            <option value="file">자료게시판</option>
+          </select>
+          <table className={css.writeTable}>
+            <tbody>
+              <tr>  
+                <th>작성자</th>
+                <td><input type="text" name="writer" required
+                  value={formState.writer} onChange={handleInputChange} /></td>
+              </tr>
+              <tr>
+                <th>제목</th>
+                <td><input type="text" name="title" required
+                  value={formState.title} onChange={handleInputChange} /></td>
+              </tr>
+              <tr>
+                <th>내용</th>
+                <td><textarea name="contents" cols="22" rows="3" required
+                  value={formState.contents} onChange={handleInputChange} ></textarea></td>
+              </tr>
+            </tbody>
+          </table>
+          <input type="submit" value="전송" className={css.writeSubmit} />
+        </div>
       </form>
   </>) 
 }

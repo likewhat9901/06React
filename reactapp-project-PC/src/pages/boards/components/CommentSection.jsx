@@ -1,7 +1,7 @@
 
 import { firestore } from "@/features/firestore"
 import { deleteDoc, doc } from "firebase/firestore";
-import { formatDate } from "./dateUtils";
+import { formatDate } from "../utils/dateUtils";
 
 function CommentSection({ comments, fetchComments, setEditComment }) {
 

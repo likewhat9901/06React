@@ -1,19 +1,17 @@
 /* 전체 영역 정렬 및 여백 */
 .regPage {
-  max-width: 640px; min-width: 600px;
+  width: 700px;
   margin: 50px auto;
   padding: 40px;
   background: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  font-family: "Apple SD Gothic Neo", Roboto, sans-serif;
 }
 
 /* 제목 */
 .regPage h2 {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 26px; font-weight: 700;
   margin-bottom: 32px;
   border-bottom: 2px solid #222;
   padding-bottom: 12px;
@@ -31,6 +29,21 @@
 .regTab td {
   font-size: 1.5rem;
   vertical-align: top;
+  line-height: 1.5rem;
+}
+.flexRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-left: 10px;
+}
+.flexRow input[type="text"] {
+  flex: 1;
+  min-width: 0;
+}
+.flexRow button {
+  white-space: nowrap;
 }
 
 .regTab label {
@@ -53,8 +66,12 @@ select {
   box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-input[name="userid"]{
-  width: 79%;
+input[name="id"]{
+  flex: 1;
+}
+
+input[type="tel"]{
+  width: 30%; 
 }
 
 input:focus,
@@ -117,7 +134,7 @@ button[type="submit"]:hover {
 }
 
 /* 우편번호 */
-input[name='zipcode']{
+input[name='postcode']{
   width: 150px;
 }
 input[name='detailAddress']{
