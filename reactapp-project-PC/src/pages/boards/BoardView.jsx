@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { firestore } from "@/features/firestore"
-import { doc, getDoc, deleteDoc, getDocs  } from "firebase/firestore";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { query, where, orderBy } from "firebase/firestore";
+import { doc, getDoc, deleteDoc, getDocs } from "firebase/firestore";
+import { collection, query, where, orderBy } from "firebase/firestore";
+
+import WriteCommentModal from "./WriteCommentModal";
+import EditCommentModal from "./EditCommentModal";
+import CommentSection from "./CommentSection";
+import { formatDate } from "./dateUtils";
 
 /* DB에 저장된 게시판 데이터 불러오기 */
 const getPost = async (postID) => {
-
   // 'MainBoard' 컬렉션 참조 가져오기
   const postRef = doc(firestore, 'boards', postID);
   const postSnap = await getDoc(postRef);
@@ -16,6 +19,7 @@ const getPost = async (postID) => {
   return postSnap;
 }
 
+/* 게시글 삭제 */
 const deletePost = async (postID) => {
   const postRef = doc(firestore, "boards", postID);
   await deleteDoc(postRef);
@@ -23,62 +27,52 @@ const deletePost = async (postID) => {
   alert("삭제완료");
 }
 
-const formatDate = (timestamp) => {
-  const dt = timestamp.toDate();
-  return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
-};
 
+/* MAIN COMPONENT */
 function BoardView() {
-  let params = useParams();
+  let { id: postId } = useParams();
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
-      id: '', writer: '', title: '', date: '', contents: '',
+      postId: '', writer: '', title: '', date: '', contents: '',
   });
 
+  const handleDelete = async () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      await deletePost(postId);
+      navigate("../");
+    }
+  };
+
   useEffect(() => {
-    if(!params.id) {
-      console.log('params.id 없음');
+    if(!postId) {
+      console.log('postId 없음');
       return;
     }
     const fetchData = async () => {
-      const postSnap = await getPost(params.id); 
+      const postSnap = await getPost(postId); 
       if (postSnap.exists()) {
         const { writer, title, createdAt, contents} = postSnap.data();
-        const id = postSnap.id;
         const date = formatDate(createdAt);
-        setFormState({ id, writer, title, date, contents, })
+        setFormState({ postId, writer, title, date, contents, })
       }
       else {
         alert("불러올 데이터가 없습니다.");
+        navigate("../"); // 존재하지 않으면 리스트로 보내기
       }
     }
     fetchData();
 
-  }, [params.id]);
+  }, [postId]);
 
 
-  /* 댓글 기능 */
-  const [comment, setComment] = useState('');
+  /* ----------------------댓글 lists------------------------ */
   const [comments, setComments] = useState([]);
 
-  const handleCommentSubmit = async (e) => {
-    e.preventDefault();
-    if (!comment.trim()) return;
-
-    await addDoc(collection(firestore, "comments"), {
-      postId: params.id,
-      text: comment,
-      createdAt: serverTimestamp(),
-    });
-
-    setComment(""); // 입력창 초기화
-    fetchComments(); // 다시 불러오기
-  };
-
+  /* DB에서 댓글 data fetch */
   const fetchComments = async () => {
     const q = query(
       collection(firestore, "comments"),
-      where("postId", "==", params.id),
+      where("postId", "==", postId),
       orderBy("createdAt", "asc")
     );
     const snapshot = await getDocs(q);
@@ -87,17 +81,18 @@ function BoardView() {
   };
 
   useEffect(() => {
-    fetchComments();
-  }, [params.id]);
+    if (postId) fetchComments();
+  }, [postId]);
+
+  /* 댓글 수정 */
+  const [editComment, setEditComment] = useState(null);
+  
   
   return (<>
     <article>
       <h2>View 페이지</h2>
-      <Link to={`../edit/${formState.id}`}>수정</Link>
-      <button type="button" onClick={()=>{
-        deletePost(params.id);
-        navigate('../');
-      }}>삭제</button>
+      <Link to={`../edit/${formState.postId}`}>수정</Link>
+      <button type="button" onClick={handleDelete}>삭제</button>
       <table id="boardTable">
         <colgroup>
           <col width="20%" />
@@ -119,32 +114,30 @@ function BoardView() {
           <tr>
             <th>내용</th>
             <td>{formState.contents}</td>
-            {/* <td 
-              className="tableImg"
-              dangerouslySetInnerHTML={{__html: formState.contents}}
-              style={{ whiteSpace:"pre-wrap" }}
-            ></td> */}
           </tr>
         </tbody>
       </table>
-      <form onSubmit={handleCommentSubmit}>
-        <input
-          type="text"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="댓글을 입력하세요"
-        />
-        <button type="submit">댓글 작성</button>
-        <ul>
-          {comments.map((c) => (
-            <li key={c.id}>
-              <p>{c.text}</p>
-            </li>
-          ))}
-        </ul>
-      </form>
+
+      <button className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
+        댓글 작성
+      </button>
+      <WriteCommentModal 
+        postId={postId}
+        fetchComments={fetchComments}
+      />
+      <CommentSection 
+        comments={comments}
+        fetchComments={fetchComments}
+        setEditComment={setEditComment}
+      />
+      <EditCommentModal
+        editComment={editComment}
+        fetchComments={fetchComments}
+        setEditComment={setEditComment}
+      />
+
     </article>
-  </>) 
+  </>)
 }
 
 export default BoardView;

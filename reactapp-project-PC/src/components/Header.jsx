@@ -1,42 +1,63 @@
 import { Link } from "react-router-dom";
 import css from "./Header.module.css";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
-function TopNav(props) {
+function TopNav() {
+  const { user, logout } = useAuth();
   
   return (<>
     <nav className={css.topNav}>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/member/login">로그인</Link></li>
-        <li><Link to="/member/register">회원가입</Link></li>
-        <li><Link to="/member/edit">회원수정</Link></li>
+        {user ? (
+          <li onClick={logout}>로그아웃</li> 
+        ) : (
+          <li><Link to="/member/login">로그인</Link></li>
+        )}
+        {user ? (
+          <li><Link to="/member/edit">회원정보수정</Link></li> 
+        ) : (
+          <li><Link to="/member/register">회원가입</Link></li>
+        )}
       </ul>
     </nav>
   </>) 
 }
 
+
 function GNB() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(prev => !prev);
   
+
   return (<>
     <div className={css.gnb}>
-      <a href="/">
-        <img src="/" alt="LOGO" />
-      </a>
+      <div className={css.logo}>
+        <a href="/">
+          <img src="/images/MySalad.png" alt="LOGO" />
+        </a>
+      </div>
+
       <nav className={css.gnb_menu}>
         <ul>
           <li><Link to="/board/main/lists">게시판</Link></li>
-          <li><Link to="/board/qna">Q&A게시판</Link></li>
-          <li><Link to="/board/file">자료게시판</Link></li>
+          <li><Link to="/board/qna/lists">Q&A게시판</Link></li>
+          <li><Link to="/board/file/lists">자료게시판</Link></li>
         </ul>
       </nav>
-      <div>
-        <label htmlFor="toggle" className={css.menu_btn}>☰</label>
-        <input type="checkbox" id="toggle" hidden />
-        <div className={css.menu}>
-          <p><a href="#">Home</a></p>
-          <p><a href="#">About</a></p>
-          <p><a href="#">Contact</a></p>
-        </div>
+
+      <div className={css.hamburgerBtn} onClick={toggleMenu}>
+        <button>
+          <span className={menuOpen ? css.barOpen : ''}></span>
+          <span className={menuOpen ? css.barOpen : ''}></span>
+          <span className={menuOpen ? css.barOpen : ''}></span>
+        </button>
+      </div>
+
+      <div className={menuOpen ? `${css.menu} ${css.menuOpen}` : css.menu}>
+        <p><a href="#">Home</a></p>
+        <p><a href="#">About</a></p>
+        <p><a href="#">Contact</a></p>
       </div>
     </div>
   </>)

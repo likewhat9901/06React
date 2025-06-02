@@ -4,10 +4,10 @@ import { Link, useParams } from "react-router-dom";
 import { firestore } from "@/features/firestore"
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 
-import css from "./Board.module.css";
+import { formatDate } from "./dateUtils";
 
 /* DB에 저장된 게시판 데이터 불러오기 */
-const getPosts = async (boardType) => {
+const getBoard = async (boardType) => {
   // 'MainBoard' 컬렉션 참조 가져오기
   const mainBoardCollection = collection(firestore, 'boards');
   const boardRef = query(mainBoardCollection, 
@@ -17,34 +17,22 @@ const getPosts = async (boardType) => {
   return boardSnap;
 }
 
-const formatDate = (timestamp) => {
-  const dt = timestamp.toDate();
-  const now = new Date();
-
-  const isToday = 
-    dt.getFullYear() === now.getFullYear() &&
-    dt.getMonth() === now.getMonth() &&
-    dt.getDate() === now.getDate();
-
-  if (isToday) {
-    // 시간 표시 (예: 14:03)
-    return `${String(dt.getHours()).padStart(2, '0')}:${String(dt.getMinutes()).padStart(2, '0')}`;
-  } else {
-    // 날짜 표시 (예: 2025-06-01)
-    return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
-  }
-};
-
-
+/* MAIN COMPONENT */
 function BoardLists() {
   const { type } = useParams();
+  const boardTitleMap = {
+    main: '자유게시판',
+    qna: 'Q&A게시판',
+    file: '자료실게시판',
+  };
   const [ posts, setPosts ] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 5;
 
+  /* DB 데이터 렌더링 */
   useEffect(() => {
     const fetchData = async () => {
-      const boardSnap = await getPosts(type); 
+      const boardSnap = await getBoard(type); 
       const postsArray = boardSnap.docs.map(doc => ({
         id: doc.id, ...doc.data(),
       }));
@@ -53,6 +41,7 @@ function BoardLists() {
     fetchData();
 
   }, [type]);
+  
 
   /* 페이징 기능 */
   const totalPages = Math.ceil(posts.length / postsPerPage); // 전체 페이지 수 계산
@@ -62,7 +51,7 @@ function BoardLists() {
 
   return (<div>
     <header>
-      <h2>자유게시판</h2>
+      <h2>{boardTitleMap[type] || '게시판'}</h2>
     </header>
     <nav>
       <Link to="/board/main/lists">자유게시판</Link>
@@ -72,7 +61,7 @@ function BoardLists() {
       <Link to="../write">글쓰기</Link>
     </nav>
     <article>
-      <table className={css.boardTable}>
+      <table>
         {/* thead */}
         <thead>
           <tr>
@@ -84,16 +73,19 @@ function BoardLists() {
         </thead>
         {/* tbody */}
         <tbody>
-          {currentPosts.map((post) => {
+          {currentPosts.map((post, index) => {
             const date = formatDate(post.createdAt);
+            // 전체 게시글 수 - ( 현재 페이지의 첫 게시글의 인덱스 (0부터 시작) +	현재 페이지 안에서 반복 중인 글의 인덱스 (0~4) )
+            // ex) 16 - (0 + 0~9) => 1번째 페이지는 16,15..8,7 순으로 보임.
+            const postNum = posts.length - (indexOfFirstPost + index); 
             return (
               <tr key={post.id}>
-                <td className="cen">{post.id}</td>
+                <td>{postNum}</td>
                 <td>
                   <Link to={"../view/" + post.id}>{post.title}</Link>
                 </td>
-                <td className="cen">{post.writer}</td>
-                <td className="cen">{date}</td>
+                <td>{post.writer}</td>
+                <td>{date}</td>
               </tr>
             );
           })}

@@ -69,7 +69,7 @@ const memberWrite = async (memberData) => {
 /* 메인 컴포넌트 */
 function Register() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   console.log("firestore 연결완료", firestore);
 
   /* id - 중복확인 with firestore */
@@ -150,7 +150,7 @@ function Register() {
 
     await memberWrite(memberData);
     console.log("회원가입 완료");
-    // navigate('/');
+    navigate('/');
   }
 
   /* HTML */
@@ -163,7 +163,7 @@ function Register() {
           {/* 미비사항: DB 반영요소 수정(pw,email 등), span 디자인 수정 */}
           <tr>
             <td><label htmlFor="id">아이디</label></td>
-            <td>
+            <td className={styles.flexRow}>
               <input type="text" id="id" name="id" value={state.id} ref={idRef} required
                 onChange={(e) => dispatch({ type: "SET_ID", value: e.target.value })} />
               <button type="button" onClick={checkID}>중복확인</button><br />
@@ -177,14 +177,16 @@ function Register() {
           {/* 패스워드 완료 */}
           <tr>
             <td><label htmlFor="pw">패스워드</label></td>
-            <td><input type="password" id="pw" name="pw" value={state.pw} ref={pwRef} required 
+            <td className={styles.flexRow}>
+              <input type="password" id="pw" name="pw" value={state.pw} ref={pwRef} required 
               onChange={(e) => dispatch({ type: "SET_PW", value: e.target.value })} />
             </td>
           </tr>
           <tr>
             <td><label htmlFor="pwCheck">패스워드 확인</label></td>
-            <td><input type="password" id="pwCheck" name="pwCheck" value={state.pwCheck} required 
-              onChange={(e) => dispatch({ type: "SET_PW_CHECK", value: e.target.value })} /><br />
+            <td className={styles.flexRow}>
+              <input type="password" id="pwCheck" name="pwCheck" value={state.pwCheck} required 
+              onChange={(e) => dispatch({ type: "SET_PW_CHECK", value: e.target.value })} />
             {state.pw && state.pwCheck && (
               <span style={{ color: state.pw === state.pwCheck ? "blue" : "red", fontSize: "14px" }}>
                 {state.pw === state.pwCheck ? "비밀번호가 일치합니다." : "비밀번호가 일치하지 않습니다."}
@@ -195,13 +197,15 @@ function Register() {
           {/* 이름 */}
           <tr>
             <td><label htmlFor="name">이름</label></td>
-            <td><input type="text" id="name" name="name" value={state.name} required 
-              onChange={(e) => dispatch({ type: "SET_NAME", value: e.target.value })} /></td>
+            <td className={styles.flexRow}>
+              <input type="text" id="name" name="name" value={state.name} required 
+              onChange={(e) => dispatch({ type: "SET_NAME", value: e.target.value })} />
+            </td>
           </tr>
           {/* 이메일 */}
           <tr>
             <td><label htmlFor="email">이메일</label></td>
-            <td>
+            <td className={styles.flexRow}>
               <input type="text" id="email" name="emailId" value={state.email.id} required
                 onChange={(e) => dispatch({ type: "SET_EMAIL_FIELD", field: "id", value: e.target.value })} />
               &nbsp;@
@@ -220,19 +224,19 @@ function Register() {
           {/* 핸드폰 번호 */}
           <tr>
             <td><label htmlFor="phone">휴대폰 번호</label></td>
-            <td>
+            <td className={styles.flexRow}>
               <input type="tel" id="phone" name="phone1" value={state.phone[0]} required 
                 onChange={(e) => {
                   dispatch({ type: "SET_PHONE", index: 0, value: e.target.value, maxNum: 3 })
                   if (e.target.value.length >= 3) phoneRef2.current.focus();
                 }} />
-              &nbsp;-&nbsp;
+              &nbsp;－&nbsp;
               <input type="tel" name="phone2" value={state.phone[1]} ref={phoneRef2} required 
                 onChange={(e) => {
                   dispatch({ type: "SET_PHONE", index: 1, value: e.target.value, maxNum: 4 })
                   if (e.target.value.length >= 4) phoneRef3.current.focus();
                 }} />
-              &nbsp;-&nbsp;
+              &nbsp;－&nbsp;
               <input type="tel" name="phone3" value={state.phone[2]} ref={phoneRef3} required 
                 onChange={(e) => dispatch({ type: "SET_PHONE", index: 2, value: e.target.value, maxNum: 4 })} />
             </td>
@@ -240,7 +244,7 @@ function Register() {
           {/* 우편번호 */}
           <tr>
             <td><label htmlFor="postcode">우편번호</label></td>
-            <td>
+            <td className={styles.flexRow}>
               <input type="text" id="postcode" name="postcode" value={state.postcode} required readOnly />
               <DaumPostcode onAddressSelect={(e) => {
                 handleAddressSelect(e);
@@ -250,12 +254,14 @@ function Register() {
           </tr>
           <tr>
             <td><label htmlFor="address">기본주소</label></td>
-            <td><input type="text" id="address" name="address" required readOnly
-                  value={state.address.base} placeholder="기본주소" /></td>
+            <td className={styles.flexRow}>
+              <input type="text" id="address" name="address" required readOnly
+                  value={state.address.base} placeholder="기본주소" />
+            </td>
           </tr>
           <tr>
             <td><label htmlFor="detailAddress">상세주소</label></td>
-            <td >
+            <td className={styles.flexRow}>
               <div className={styles.addressWrapper}>
                 <input type="text" id="detailAddress" name="detailAddress" className={styles.detailInput} required
                   value={state.address.detail} placeholder="상세주소를 입력하세요" ref={detailAddressRef}

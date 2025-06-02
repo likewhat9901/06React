@@ -36,20 +36,6 @@
   border-radius: 8px;
 }
 
-.options {
-  display: flex;
-  justify-content: flex-start;
-  gap: 20px;
-  font-size: 14px;
-  color: #333;
-}
-
-.options label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .loginBtn {
   padding: 14px;
   background-color: #1a73e8;

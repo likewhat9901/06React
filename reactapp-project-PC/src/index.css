@@ -1,3 +1,11 @@
 html{ font-size: 10px; }
-*{ margin: 0; padding: 0; font-size: 1.6rem;}
+*{ margin: 0; padding: 0; font-size: 1.6rem;
+  font-family: 'SBAggroB';}
+
+@font-face {
+    font-family: 'SBAggroB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
