@@ -60,6 +60,8 @@ button[type="submit"],
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s ease;
+
+  text-align: center;       /* 텍스트 가운데 정렬 */
 }
 
 .primaryBtn:hover {

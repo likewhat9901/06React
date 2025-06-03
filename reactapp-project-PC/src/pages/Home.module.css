@@ -63,6 +63,7 @@
 
 .searchBar {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -91,6 +92,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 5px;
 }
 
 .hashtagList {

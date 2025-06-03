@@ -1,8 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import css from './Home.module.css';
 
 const bannerData = [
+  {
+    text: (
+      <>
+        소비 Data 속<br />
+        숨겨진 <strong>Trend</strong>를<br />
+        확인하세요
+      </>
+    ),
+    image: '/images/카리나.avif',
+  },
   {
     text: (
       <>
@@ -13,16 +23,6 @@ const bannerData = [
     ),
     image: '/images/코스모카리나.jpg',
     color: '#fff',
-  },
-  {
-    text: (
-      <>
-        소비 Data 속<br />
-        숨겨진 <strong>Trend</strong>를<br />
-        확인하세요
-      </>
-    ),
-    image: '/images/카리나.avif',
   },
   {
     text: (
@@ -48,6 +48,8 @@ const bannerData = [
 
 function Home() {
   const [index, setIndex] = useState(0);
+    const refRoom = useRef();
+    const refId = useRef();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,6 +57,7 @@ function Home() {
     }, 5000); // 5초마다 전환
     return () => clearInterval(interval); // cleanup
   }, []);
+
 
   return (
     <div className={css.homeContainer}>
@@ -75,13 +78,14 @@ function Home() {
 
       {/* 🔵 상단 검색/해시태그 영역 */}
       <section className={css.searchSection}>
+        <h2>채팅방 바로가기</h2><br />
         <div className={css.searchBar}>
-          <input
-            type="text"
-            placeholder="게시글명, 해시태그"
-            className={css.searchInput}
-          />
-          <button className={css.snsButton}>
+          <input type="text" placeholder="방이름" className={css.searchInput} ref={refRoom} />
+          <input type="text" placeholder="아이디명" className={css.searchInput} ref={refId} />
+          <button className={css.snsButton}
+            onClick={() => {
+              window.open(`#/talk?roomId=${refRoom.current.value}&userId=${refId.current.value}`, '', 'width=550, height=900');
+            }}>
             🔍
           </button>
         </div>
@@ -103,17 +107,17 @@ function Home() {
         </div>
         <div className={css.serviceCard}>
           <h4>혁신적인</h4>
-          <h3>솔루션서비스</h3>
-          <p>상권분석, 시장 모니터링</p>
+          <h3>솔루션 서비스</h3>
+          <p>가계부 분석, 실시간 모니터링</p>
         </div>
         <div className={css.serviceCard}>
           <h4>스마트한</h4>
-          <h3>광고서비스</h3>
-          <p>최적의 고객 타겟팅</p>
+          <h3>가계부 모델링</h3>
+          <p>최적의 가계부 커스터마이징</p>
         </div>
         <div className={css.serviceCard}>
           <h4>탁월한</h4>
-          <h3>API서비스</h3>
+          <h3>분석 서비스</h3>
           <p>Data 실시간 활용</p>
         </div>
       </section>

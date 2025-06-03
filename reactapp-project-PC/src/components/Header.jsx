@@ -34,14 +34,14 @@ function GNB() {
   return (<>
     <div className={css.gnb}>
       <div className={css.logo}>
-        <a href="/">
+        <Link to="/">
           <img src="/images/MySalad.png" alt="LOGO" />
-        </a>
+        </Link>
       </div>
 
       <nav className={css.gnb_menu}>
         <ul>
-          <li><Link to="/board/main/lists">게시판</Link></li>
+          <li><Link to="/board/main/lists">자유게시판</Link></li>
           <li><Link to="/board/qna/lists">Q&A게시판</Link></li>
           <li><Link to="/board/file/lists">자료게시판</Link></li>
         </ul>
@@ -56,9 +56,15 @@ function GNB() {
       </div>
 
       <div className={menuOpen ? `${css.menu} ${css.menuOpen}` : css.menu}>
-        <p><a href="#">Home</a></p>
-        <p><a href="#">About</a></p>
-        <p><a href="#">Contact</a></p>
+        <div className={css.menuInner}>
+          <p><a href="#">내 가계부</a></p>
+          <p><a href="#">카테고리 관리</a></p>
+          <p><a href="#">지출 입력</a></p>
+          <p><a href="#">수입 입력</a></p>
+          <p><a href="#">월별 통계</a></p>
+          <p><a href="#">맞춤 리포트</a></p>
+          <p><a href="#">설정</a></p>
+        </div>
       </div>
     </div>
   </>)
@@ -68,10 +74,10 @@ function GNB() {
 function Header() {
   
   return (<>
-    <header className={css.header}>
+    <div className={css.header}>
       <TopNav />
       <GNB />
-    </header>
+    </div>
   </>)
 }
 

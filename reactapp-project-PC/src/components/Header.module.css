@@ -1,15 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Noto+Sans+KR:wght@100..900&display=swap');
-@font-face {
-    font-family: 'SBAggroB';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 /* Header */
 .header {
   font-family: "SBAggroB", sans-serif;
-  width: 100%; height: 120px; padding: 0 10px;
+  width: 100%; height: 130px; padding: 0 10px;
   position: sticky; top: 0;
   background: white; border-bottom: 1px solid #ccc;
   color: #2e2e2e; box-sizing: border-box;
@@ -34,7 +26,7 @@
 
 /* GNB */
 .gnb{
-  width: 100%; height: 60px; 
+  width: 100%; height: 80px; 
   display: flex; justify-content: space-between; align-items: center;
 }
 
@@ -48,7 +40,7 @@
   position: absolute;
   left: 15px;
   bottom: 5px;
-  height: 65px;  /* 더 키운 크기 */
+  height: 80px;  /* 더 키운 크기 */
   object-fit: contain;
 }
 .logo a{
@@ -103,7 +95,7 @@
   transition: all 0.3s ease;
 }
 .hamburgerBtn:hover span {
-  background-color: green;
+  background-color: #2f64ff;
 }
 
 /* 햄버거 메뉴 활성화 시 */
@@ -120,17 +112,13 @@
 /* GNB - Menu div */
 .menu {
   position: absolute;
-  top: 120px;
+  top: 130px;
   right: 0;
   width: 100%;
-  height: 200px;
-  background: #e6fff3;
+  height: auto;
+  background: white;
   padding: 10px;
-
-  display: flex;              /* Flexbox 설정 */
-  flex-direction: column;     /* 세로로 정렬 */
-  align-items: center;        /* 수평 가운데 */
-  justify-content: baseline;    /* 수직 가운데 */
+  border-bottom: 1px solid #ccc;
 
   opacity: 0;
   visibility: hidden;
@@ -141,5 +129,22 @@
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+.menuInner {
+  max-width: 450px;
+  margin: 0 auto;
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 24px;
+  justify-items: center;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+}
+.menu a:hover {
+  color: rgb(68, 201, 139);
 }
 

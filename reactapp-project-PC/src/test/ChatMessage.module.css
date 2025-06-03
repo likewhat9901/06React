@@ -1,0 +1,88 @@
+.App {
+  width: 500px;
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.App h2 {
+  color: #2f64ff;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.msgHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#closeBtn {
+  margin-bottom: 10px;
+  background-color: #2f64ff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#chatWindow {
+  width: 100%;
+  height: 700px;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.message {
+  max-width: 70%;
+  padding: 8px 14px;
+  border-radius: 16px;
+  line-height: 2rem;
+  font-size: 1.5rem;
+  word-break: break-word;
+}
+
+.myMsg {
+  align-self: flex-end;
+  background-color: #2f64ff;
+  color: white;
+  border-bottom-right-radius: 0;
+}
+
+.otherMsg {
+  align-self: flex-start;
+  background-color: #ececec;
+  color: black;
+  border-bottom-left-radius: 0;
+}
+
+.App form {
+  display: flex;
+  gap: 8px;
+}
+
+.App input[name="message"] {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.App button[type="submit"] {
+  padding: 8px 14px;
+  border-radius: 20px;
+  background-color: #4dc3ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}

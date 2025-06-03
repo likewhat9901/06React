@@ -1,9 +1,10 @@
 .loginContainer {
-  width: 100%;
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 0 16px;
-  font-family: sans-serif;
+  max-width: 500px;
+  margin: 150px auto;
+  padding: 50px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 .title {
@@ -43,8 +44,11 @@
   border: none;
   border-radius: 8px;
   font-size: 16px;
-  font-weight: bold;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .loginBtn:hover {

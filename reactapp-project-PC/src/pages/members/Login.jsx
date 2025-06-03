@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { firestore } from "@/features/firestore"
 import { doc, getDoc } from 'firebase/firestore';
@@ -79,7 +79,7 @@ function Login() {
         <button type="submit" className={css.loginBtn}>로그인</button>
 
         <div className={css.footer}>
-          <a href="register">회원가입</a>
+          <Link to="register">회원가입</Link>
           <span>|</span>
           <a href="#">아이디 찾기 · 비밀번호 변경</a>
         </div>

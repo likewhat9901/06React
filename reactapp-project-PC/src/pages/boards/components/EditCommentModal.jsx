@@ -17,16 +17,24 @@ function EditCommentModal({ editComment, fetchComments, setEditComment }) {
   }, [editComment]);
   
   const handleClose = () => {
-    setComment("");
+    setWriter('');
+    setComment('');
     setEditComment(null);
   };
   
-  const handleUpdate = async () => {
-    if (!comment.trim()) return;
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    if (!comment.trim()) {
+      alert("댓글수정 실패");
+      handleClose();
+      return;
+    }
     await updateDoc(doc(firestore, "comments", editComment.id), { text: comment });
     fetchComments(); // 다시 불러오기
+
     handleClose();
   };
+  
 
   return (<>
     {/* <!-- 댓글 작성 Modal -->         */}
@@ -54,13 +62,9 @@ function EditCommentModal({ editComment, fetchComments, setEditComment }) {
           </div>
 
           <div className={css.modalFooter}>
-            <button type="submit" className={css.primaryBtn} >작성</button>
+            <button type="submit" className={css.primaryBtn} data-bs-dismiss="modal">작성</button>
             <button type="button" className={css.secondaryBtn} data-bs-dismiss="modal"
-              onClick={()=>{
-                setWriter('');
-                setComment('');
-                setEditComment(null);
-              }}>
+              onClick={handleClose}>
               닫기
             </button>
           </div>

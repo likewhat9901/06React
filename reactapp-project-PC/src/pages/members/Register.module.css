@@ -54,10 +54,10 @@
   color: #333;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="tel"],
-select {
+.flexRow input[type="text"],
+.flexRow input[type="password"],
+.flexRow input[type="tel"],
+.flexRow select {
   width: 100%;
   padding: 12px 14px;
   border: 1px solid #ccc;

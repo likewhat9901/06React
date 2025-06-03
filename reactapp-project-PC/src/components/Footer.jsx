@@ -8,11 +8,11 @@ function Footer() {
           <img src="/images/MySalad_icon.png" alt="DataBada 로고" className={css.logo} />
           <div className={css.footerInfo}>
             <p>
-              서울특별시 중구 을지로 100 (을지로2가, 파인에비뉴 A동) 신한카드<br />
-              이메일: databada@shinhan.com
+              서울특별시 금천구 가산동 549-1 (가산디지털2로 101, 한라원앤원타워 B동) KOSMO<br />
+              이메일: parkko123@naver.com
             </p>
             <p className={css.copyright}>
-              Copyright 2024 Shinhan Card DataBada. All Rights Reserved.
+              Copyright 2025 CheonJiIn Card MySalad. All Rights Reserved.
             </p>
           </div>
           <div className={css.links}>
