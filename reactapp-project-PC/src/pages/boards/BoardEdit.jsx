@@ -64,7 +64,7 @@ function BoardEdit() {
   return (<>
     <div className={css.editContainer}>
       <div className={css.editHeader}>
-        <h2>Edit 페이지</h2>
+        <h2>게시글 수정</h2>
       </div>
 
       <form onSubmit={(e)=>{
@@ -74,7 +74,7 @@ function BoardEdit() {
       }}>
         <table className={css.editTable}>
           <colgroup>
-            <col width="20%" />
+            <col width="15%" />
             <col width="*" />
           </colgroup>
           <tbody>

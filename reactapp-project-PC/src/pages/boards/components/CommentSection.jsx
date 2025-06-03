@@ -3,6 +3,8 @@ import { firestore } from "@/features/firestore"
 import { deleteDoc, doc } from "firebase/firestore";
 import { formatDate } from "../utils/dateUtils";
 
+import css from "./CommentSection.module.css"
+
 function CommentSection({ comments, fetchComments, setEditComment }) {
 
   const handleDelete = async (commentId) => {
@@ -19,20 +21,27 @@ function CommentSection({ comments, fetchComments, setEditComment }) {
   };
 
   return (
-    <div>
-      <ul>
+    <div className={css.viewContainer}>
+      <ul className={css.commentList}>
         {comments.map(c => (
-          <li key={c.id}>
-            <span style={{ whiteSpace: 'pre-wrap' }}>{c.text}</span>
-            <span>{formatDate(c.createdAt)}</span>
-            <button onClick={() => handleDelete(c.id)}>삭제</button>
-            <button
-              data-bs-toggle="modal"
-              data-bs-target="#editCommentModal"
-              onClick={() => setEditComment(c)}
-            >
-              수정
-            </button>
+          <li key={c.id} className={css.commentItem}>
+            <div className={css.commentGroup}>
+              <span className={css.commentWriter}>{c.writer}</span>
+              <span className={css.commentText} style={{ whiteSpace: 'pre-wrap' }}>{c.text}</span>
+              <span className={css.commentDate}>{formatDate(c.createdAt)}</span>
+            </div>
+            <div className={css.buttonGroup}>
+              <button
+                className={css.actionButton}
+                data-bs-toggle="modal"
+                data-bs-target="#editCommentModal"
+                onClick={() => setEditComment(c)}
+              >
+                수정
+              </button>
+              <button className={css.actionButton}
+                onClick={() => handleDelete(c.id)}>삭제</button>
+            </div>
           </li>
         ))}
       </ul>

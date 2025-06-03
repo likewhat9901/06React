@@ -41,13 +41,14 @@
 }
 
 .editTable th {
-  text-align: left;
   width: 120px;
   background: #f9f9f9;
   padding: 12px;
   font-weight: 600;
   color: #444;
   border-bottom: 1px solid #eee;
+  text-align: center;          /* ← 수평 중앙 정렬 */
+  vertical-align: middle;
 }
 
 .editTable td {

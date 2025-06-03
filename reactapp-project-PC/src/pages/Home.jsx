@@ -1,79 +1,124 @@
-// import styles from './home.module.css';
+import { useEffect, useState } from 'react';
 
-import { Link } from "react-router-dom";
+import css from './Home.module.css';
 
-function name(params) {
-  return (<>
-    <div className={styles.homeWrapper}>
-      {/* 메인 배너 영역 */}
-      <section className={styles.bannerSection}>
-        <div className={styles.bannerText}>
-          <h2>
-            소비 Data 속 <br />
-            숨겨진 Trend를 <br />
-            확인하세요
-          </h2>
-          <a href="#" className={styles.ctaLink}>활용장 바로가기 &gt;</a>
-        </div>
-        <div className={styles.bannerImage}>
-          {/* 👉 이미지 들어갈 자리 */}
-        </div>
-        <div className={styles.slideControls}>
-          <span className={styles.slideNumber}>2/2</span>
-          <div className={styles.navButtons}>
-            <button>{"<"}</button>
-            <button>{">"}</button>
+const bannerData = [
+  {
+    text: (
+      <>
+        코스모 카리나<br />
+        <strong style={{color: 'hotpink'}}>혜림이가</strong><br />
+        와또요
+      </>
+    ),
+    image: '/images/코스모카리나.jpg',
+    color: '#fff',
+  },
+  {
+    text: (
+      <>
+        소비 Data 속<br />
+        숨겨진 <strong>Trend</strong>를<br />
+        확인하세요
+      </>
+    ),
+    image: '/images/카리나.avif',
+  },
+  {
+    text: (
+      <>
+        새로운 시장을<br />
+        <strong>데이터로 예측</strong><br />
+        해보세요
+      </>
+    ),
+    image: '/images/카리나4.jpg',
+  },
+  {
+    text: (
+      <>
+        BankSalad와 함께<br />
+        <strong>무한한 인사이트</strong><br />
+        를 발견하세요
+      </>
+    ),
+    image: '/images/카리나단발.jpg',
+  },
+];
+
+function Home() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % bannerData.length);
+    }, 5000); // 5초마다 전환
+    return () => clearInterval(interval); // cleanup
+  }, []);
+
+  return (
+    <div className={css.homeContainer}>
+      {/* 슬라이드형 이미지 영역 */}
+      <section
+        className={css.bannerSection}
+        style={{ backgroundImage: `url(${bannerData[index].image})` }}
+      >
+        <div className={css.bannerContent}>
+          <div className={css.bannerText}>
+            <h2 style={{ color: bannerData[index].color }}>
+              {bannerData[index].text}
+            </h2>
+            <a href="#" className={css.bannerLink}>활용장 바로가기 &gt;</a>
           </div>
         </div>
       </section>
 
-      {/* 로그인 박스 */}
-      <aside className={styles.loginBox}>
-        <div className={styles.profileIcon}>
-          {/* 👉 프로필 아이콘 자리 */}
+      {/* 🔵 상단 검색/해시태그 영역 */}
+      <section className={css.searchSection}>
+        <div className={css.searchBar}>
+          <input
+            type="text"
+            placeholder="게시글명, 해시태그"
+            className={css.searchInput}
+          />
+          <button className={css.snsButton}>
+            🔍
+          </button>
         </div>
-        <p>로그인 후<br />나만의 맞춤 정보를 이용하세요.</p>
-        <button className={styles.loginBtn}>로그인</button>
-      </aside>
-
-      {/* 정보 카드 */}
-      <section className={styles.infoCard}>
-        <div className={styles.infoHeader}>데이터테크 활용장</div>
-        <div className={styles.infoHighlight}>데이터 활용 성공 노하우</div>
-        <div className={styles.trendTag}>Trend Report</div>
-        <p className={styles.trendText}>
-          신한카드가 선정한 2025년<br />
-          트렌드 키워드 'REVIVE'
-        </p>
-        <div className={styles.trendDate}>2025.01.17</div>
-      </section>
-
-      {/* 검색창 */}
-      <section className={styles.searchSection}>
-        <input
-          type="text"
-          placeholder="상품명, 해시태그"
-          className={styles.searchInput}
-        />
-        <button className={styles.searchButton}>🔍</button>
-        <div className={styles.hashtags}>
-          <span>#상권분석</span>
-          <span>#개인사업자</span>
-          <span>#특화업종</span>
-          <span>#부동산</span>
+        <div className={css.hashtagList}>
+          <span>#가계부분석</span>
+          <span>#뱅크샐러드</span>
+          <span>#소비패턴</span>
+          <span>#AI분석</span>
           <span>#모니터링</span>
         </div>
       </section>
-    </div>
-  
-  </>)
-}
 
-function Home() {
-  return (<>
-    <h2 style={{textAlign:'right'}}>홈</h2>
-    <Link to='classroom'>교실</Link>
-  </>);
+      {/* 🔳 서비스 카드 영역 */}
+      <section className={css.serviceSection}>
+        <div className={css.serviceCard}>
+          <h4>다양한</h4>
+          <h3>Data서비스</h3>
+          <p>Data One-Stop Service</p>
+        </div>
+        <div className={css.serviceCard}>
+          <h4>혁신적인</h4>
+          <h3>솔루션서비스</h3>
+          <p>상권분석, 시장 모니터링</p>
+        </div>
+        <div className={css.serviceCard}>
+          <h4>스마트한</h4>
+          <h3>광고서비스</h3>
+          <p>최적의 고객 타겟팅</p>
+        </div>
+        <div className={css.serviceCard}>
+          <h4>탁월한</h4>
+          <h3>API서비스</h3>
+          <p>Data 실시간 활용</p>
+        </div>
+      </section>
+    </div>
+  );
 }
 
 export default Home;

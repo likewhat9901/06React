@@ -2,17 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { firestore } from "@/features/firestore"
+import { storage } from "@/features/storageConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 import css from "./BoardWrite.module.css"
 
-const addPost = async (postData) => {  
-  await addDoc(collection(firestore, 'boards'), {
-    ...postData,
-    createdAt: serverTimestamp(),
-  });
-  console.log("DB저장완료");
-}
 
 function BoardWrite() {
   const navigate = useNavigate();
@@ -22,20 +17,37 @@ function BoardWrite() {
     title: '',
     contents: '',
   });
+  const [file, setFile] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
     console.log('formState', formState);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let fileURL = null;
+
+    if (file) {
+      const filename = `${Date.now()}_${file.name}`;
+      const fileRef = ref(storage, `uploads/${filename}`);
+      await uploadBytes(fileRef, file);
+      fileURL = await getDownloadURL(fileRef);
+    }
+
+    await addDoc(collection(firestore, 'boards'), {
+      ...formState,
+      fileURL, // ← 이걸 함께 저장
+      createdAt: serverTimestamp(),
+    });
+
+    navigate('../lists');
+  };
   
   return (<>
-      <form className={css.writeForm} onSubmit={(e) => {
-        e.preventDefault();
-        addPost(formState);
-        console.log("submit 완료");
-        navigate('../lists');
-      }}>
+      <form className={css.writeForm} onSubmit={handleSubmit}>
         <div className={css.writeContainer}>
           <select name="boardType" required
             value={formState.boardType} onChange={handleInputChange} >
@@ -61,6 +73,14 @@ function BoardWrite() {
                 <td><textarea name="contents" cols="22" rows="3" required
                   value={formState.contents} onChange={handleInputChange} ></textarea></td>
               </tr>
+              {formState.boardType === 'file' && (
+                <tr>
+                  <th>파일 첨부</th>
+                  <td>
+                    <input type="file" name="attachment" onChange={(e) => setFile(e.target.files[0])} />
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
           <input type="submit" value="전송" className={css.writeSubmit} />

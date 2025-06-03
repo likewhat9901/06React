@@ -31,13 +31,21 @@ const deletePost = async (postID) => {
 
 /* MAIN COMPONENT */
 function BoardView() {
-  let { id: postId } = useParams();
+  let { id: postId, type } = useParams();
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
-      postId: '', writer: '', title: '', date: '', contents: '',
+      postId: '', writer: '', title: '', date: '', contents: '', fileURL: '',
   });
+  const [filename, setFilename] = useState('');
+
+  const boardTitleMap = {
+    main: '자유게시글',
+    qna: 'Q&A게시글',
+    file: '자료실게시글',
+  };
 
   const handleDelete = async () => {
+    console.log(formState.fileURL);
     if (window.confirm("정말 삭제하시겠습니까?")) {
       await deletePost(postId);
       navigate("../lists");
@@ -52,9 +60,20 @@ function BoardView() {
     const fetchData = async () => {
       const postSnap = await getPost(postId); 
       if (postSnap.exists()) {
-        const { writer, title, createdAt, contents} = postSnap.data();
+        const { writer, title, createdAt, contents, fileURL } = postSnap.data();
         const date = formatDate(createdAt);
-        setFormState({ postId, writer, title, date, contents, })
+
+        // 파일명 가공
+        let name = '';
+        if (fileURL) {
+          const fullPath = fileURL.split("?")[0];
+          const encoded = fullPath.split("/").pop(); // uploads%2Ffilename
+          const decoded = decodeURIComponent(encoded); // uploads/filename
+          name = decoded.replace(/^uploads\//, '').replace(/^\d+_/, '');
+        }
+
+        setFormState({ postId, writer, title, date, contents, fileURL });
+        setFilename(name); // ⬅️ 따로 저장
       }
       else {
         alert("불러올 데이터가 없습니다.");
@@ -74,7 +93,7 @@ function BoardView() {
     const q = query(
       collection(firestore, "comments"),
       where("postId", "==", postId),
-      orderBy("createdAt", "asc")
+      orderBy("createdAt", "desc")
     );
     const snapshot = await getDocs(q);
     const fetchedComments = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -92,7 +111,7 @@ function BoardView() {
   return (<>
     <div className={css.viewContainer}>
       <div className={css.viewHeader}>
-        <h2>View 페이지</h2>
+        <h2>{boardTitleMap[type] || '?페이지'}</h2>
         <div className={css.viewActions}>
           <Link to={`../edit/${formState.postId}`}>수정</Link>
           <button type="button" onClick={handleDelete}>삭제</button>
@@ -100,7 +119,8 @@ function BoardView() {
       </div>
       <table className={css.viewTable}>
         <colgroup>
-
+          <col width="15%" />
+          <col width="*" />
         </colgroup>
         <tbody>
           <tr>
@@ -119,27 +139,45 @@ function BoardView() {
             <th>내용</th>
             <td className={css.viewTableContents}>{formState.contents}</td>
           </tr>
+          {formState.fileURL && (
+            <tr>
+              <th>첨부파일</th>
+              <td className={css.viewTableFile}>
+                {/\.(jpg|jpeg|png|gif|avif)$/i.test(formState.fileURL.split('?')[0]) && (
+                  <img src={formState.fileURL} alt="첨부 이미지" />
+                )}
+                <a href={formState.fileURL} target="_blank" rel="noopener noreferrer">
+                  <span>{filename}</span><br />
+                  첨부파일 다운로드(이미지는 새 창에서 다운로드)
+                </a>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
-
-      <button className={css.commentBtn} data-bs-toggle="modal" data-bs-target="#commentModal">
-        댓글 작성
-      </button>
+      <div className={css.viewFooter}>
+        <button className={css.commentBtn} onClick={()=>navigate("../lists")}>
+          목록
+        </button>
+        {type === 'qna' && <button className={css.commentBtn} data-bs-toggle="modal" data-bs-target="#commentModal">
+          댓글 작성 
+        </button>}
+      </div>
     </div>
-    <WriteCommentModal 
+    {type === 'qna' && <WriteCommentModal 
       postId={postId}
       fetchComments={fetchComments}
-    />
-    <CommentSection 
+    />}
+    {type === 'qna' && <CommentSection 
       comments={comments}
       fetchComments={fetchComments}
       setEditComment={setEditComment}
-    />
-    <EditCommentModal
+    />}
+    {type === 'qna' && <EditCommentModal
       editComment={editComment}
       fetchComments={fetchComments}
       setEditComment={setEditComment}
-    />
+    />}
   </>)
 }
 

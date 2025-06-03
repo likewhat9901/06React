@@ -1,0 +1,143 @@
+.homeContainer {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+
+.bannerSection {
+  background-color: #f5f6f8; /* 배경 이미지 없을 때 fallback */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 40px 30px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  height: 400px;
+
+  transition: background-image 0.5s ease-in-out;
+}
+
+.bannerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.bannerText h2 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.4;
+  color: #111;
+}
+
+.bannerText strong {
+  font-size: 28px;
+  color: #2f64ff;
+}
+
+.bannerLink {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.bannerLink:hover {
+  text-decoration: underline;
+}
+
+
+.searchSection {
+  background-color: #2f64ff;
+  padding: 30px 20px;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #fff;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  width: 300px;
+  max-width: 90%;
+  font-size: 16px;
+}
+
+.snsButton {
+  background-color: #fff;
+  color: #2f64ff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hashtagList {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #d0e0ff;
+}
+
+.serviceSection {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.serviceCard {
+  flex: 1 1 200px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+}
+
+.serviceCard h4 {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.serviceCard h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.serviceCard p {
+  font-size: 14px;
+  color: #2f64ff;
+  font-weight: 500;
+}

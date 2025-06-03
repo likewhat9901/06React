@@ -5,7 +5,6 @@
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .writeForm select {
@@ -49,16 +48,22 @@
   resize: vertical;
 }
 
+.writeTable input[type="file"] {
+  display: flex;
+  justify-content: flex-start;
+}
+
 .writeSubmit {
   display: block;
   margin-left: auto;
-  padding: 12px 24px;
+  padding: 10px 20px;
   font-size: 15px;
   background-color: #3f51b5;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
 }
 .writeSubmit:hover {
   background-color: #303f9f;

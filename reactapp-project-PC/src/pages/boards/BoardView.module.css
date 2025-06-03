@@ -5,7 +5,6 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .viewHeader {
@@ -58,26 +57,53 @@
   width: 100px;
   color: #666;
   background: #fafafa;
+  text-align: center;          /* ← 수평 중앙 정렬 */
+  vertical-align: middle;
 }
 
 .viewTable td {
   color: #222;
 }
+
+.viewTableFile {
+  display: flex;
+  flex-direction: column;
+}
+.viewTableFile img {
+  max-width: 500px; height: auto;
+}
+.viewTableFile a {
+  text-decoration: none;
+}
+.viewTableFile a span {
+  text-decoration: none;
+  color: #333;
+}
+
 .viewTableContents {
   white-space: pre-line;
 }
 
 .commentBtn {
   margin-top: 24px;
-  padding: 10px 20px;
   background: #3f51b5;
   color: #fff;
   border: none;
   border-radius: 6px;
-  font-size: 12px;
   cursor: pointer;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
   transition: background 0.2s ease;
 }
 .commentBtn:hover {
   background: #303f9f;
+}
+
+.viewFooter {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
