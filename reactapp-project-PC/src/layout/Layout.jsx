@@ -15,7 +15,6 @@ function Layout() {
       <Outlet />
     </main>
     <Footer />
-    {/* <Chat /> */}
   </>) 
 }
 

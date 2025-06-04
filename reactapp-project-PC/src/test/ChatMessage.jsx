@@ -98,7 +98,7 @@ function ChatMessage() {
   
   return (<>
     <div className={css.App}>
-      <h2>KOSMO CHAT</h2>
+      <h2>{roomId}</h2>
       <div className={css.msgHeader}>
         <p>아이디명 : {userId}</p>
         <button id={css.closeBtn} onClick={() => window.self.close()}>
