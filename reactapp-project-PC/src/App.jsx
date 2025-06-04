@@ -36,12 +36,9 @@ function App() {
           <Route path="view/:id" element={<BoardView />} />
           <Route path="edit/:id" element={<BoardEdit />} />
         </Route>
-        
       </Route>
 
-      {/* 실시간 채팅은 2단계 라우팅 처리가 되어있다.
-      첫번째 화면은 대화방, 대화명 입력을 위한 입력상자가 있음.
-      2개의 정보를 입력 후 팝업창으로 채팅 대화창(2번째 화면)을 띄우게 됨. */}
+      {/* 실시간 채팅 */}
       <Route path="talk" element={<ChatMessage />}/>
     </Routes>
   </>) 
