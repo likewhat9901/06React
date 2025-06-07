@@ -1,0 +1,28 @@
+/* AccountImportPage.module.css */
+.container {
+  padding: 2rem;
+}
+
+.uploadSection {
+  border: 2px dashed #ccc;
+  padding: 2rem;
+  text-align: center;
+  background: #fafafa;
+}
+
+.resultSection {
+  margin-top: 2rem;
+}
+
+.previewTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.previewTable th,
+.previewTable td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}

@@ -41,9 +41,8 @@ function GNB() {
 
       <nav className={css.gnb_menu}>
         <ul>
-          <li><Link to="/board/main/lists">자유게시판</Link></li>
-          <li><Link to="/board/qna/lists">Q&A게시판</Link></li>
-          <li><Link to="/board/file/lists">자료게시판</Link></li>
+          <li><Link to="/account/import">나만의 가계부</Link></li>
+          <li><Link to="/board/main/lists">게시판</Link></li>
         </ul>
       </nav>
 
