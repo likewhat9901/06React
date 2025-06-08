@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import css from "./AccountImportPage.module.css";
+import { Link } from "react-router-dom";
+import AccountTable from "./components/AccountTable"
 
 import {
   BarChart,
@@ -13,9 +15,6 @@ import {
 } from 'recharts';
 
 function AccountImportPage() {
-  const allColumns = ['날짜', '시간', '타입', '대분류', '소분류','내용', '금액', '화폐', '결제수단', '메모'];
-  const [selected, setSelected] = useState(allColumns);
-  const visibleColumns = allColumns.filter((col) => selected.includes(col));
   const [parsedData, setParsedData] = useState([]);
 
   const handleFileUpload = (e) => {
@@ -58,15 +57,19 @@ function AccountImportPage() {
     reader.readAsArrayBuffer(file); // 실제 파일 읽기 트리거 -> 다 읽으면 onload 콜백함수 실행
   };
 
-  const handleToggleColumn = (column) => {
-    setSelected((prev) =>
-      prev.includes(column) ? prev.filter((c) => c !== column) : [...prev, column]
-    );
-  };
 
   return (
     <div className={css.container}>
-      <h1>🧾 나만의 가계부 만들기</h1>
+      <div className={css.header}>
+        <h1 className={css.title}>
+          🧾 나만의 가계부 만들기
+          {parsedData.length !== 0 && <span>✅ 데이터 업로드 완료</span>}
+        </h1>
+        <div className={css.nav}>
+          <Link to="./">개요</Link>
+          <Link to="data">가계부 데이터</Link>
+        </div>
+      </div>
 
       {parsedData.length === 0 ? (
         <div className={css.uploadSection}>
@@ -75,9 +78,13 @@ function AccountImportPage() {
         </div>
       ) : (
         <div className={css.resultSection}>
-          <h2>✅ 데이터 업로드 완료</h2> <br />
+          <div>
+            <h1>총 지출</h1>
 
-          <h2>📊 바 차트</h2>
+          </div>
+
+
+          <h2>📊 일별 지출</h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={parsedData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -90,42 +97,9 @@ function AccountImportPage() {
           <br /><br />
 
 
-          <h2>📂 가계부 데이터</h2>
-          {/* 체크박스로 표시할 컬럼 선택 */}
-          <div>
-            {['날짜', '시간', '타입', '대분류', '소분류','내용', '금액', '화폐', '결제수단', '메모'].map((col) => (
-              <label key={col}>
-                <input
-                  type="checkbox"
-                  checked={selected.includes(col)}
-                  onChange={() => handleToggleColumn(col)}
-                />
-                {col}
-              </label>
-            ))}
-          </div>
-
-          {/* 데이터 테이블 */}
-          <table className={css.previewTable}>
-            <thead>
-              <tr>
-                {allColumns
-                  .filter((col) => selected.includes(col))
-                  .map((col) => <th key={col}>{col}</th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {parsedData.map((row, i) => (
-                <tr key={i}>
-                  {allColumns
-                    .filter((col) => selected.includes(col))
-                    .map((col) => (
-                      <td key={col}>{row[col]}</td>
-                    ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <AccountTable
+            parsedData={parsedData}
+          />
           
         </div>
       )}

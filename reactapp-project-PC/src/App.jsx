@@ -16,6 +16,7 @@ import BoardView from "./pages/boards/BoardView";
 import BoardEdit from "./pages/boards/BoardEdit";
 
 import AccountImportPage from "./pages/account/AccountImportPage";
+import AccountTable from "./pages/account/components/AccountTable";
 
 
 
@@ -43,7 +44,8 @@ function App() {
         </Route>
 
         <Route path="account">
-          <Route path="import" element={<AccountImportPage/>} />
+          <Route path="" element={<AccountImportPage/>} />
+          <Route path="data" element={<AccountTable/>} />
         </Route>
       </Route>
 
